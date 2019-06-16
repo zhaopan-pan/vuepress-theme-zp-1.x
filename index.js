@@ -16,7 +16,7 @@ module.exports = (options, ctx) => ({
         : path.resolve(__dirname, 'noopModule.js')
     }
   },
-
+  layoutDir: 'layouts',
   plugins: [
     ['@vuepress/active-header-links', options.activeHeaderLinks],
     '@vuepress/search',
