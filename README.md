@@ -1,6 +1,6 @@
-# @vuepress/theme-default
+# vuepress-theme-zp
 
-> theme-default for vuepress
+>this theme for vuepress
 
 ## Plugins
 
