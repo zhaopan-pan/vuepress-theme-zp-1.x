@@ -1,15 +1,15 @@
 {
-  "name": "@vuepress/theme-default",
+  "name": "vuepress-theme-zp",
   "version": "1.0.0-alpha.48",
-  "description": "Default theme for VuePress",
+  "description": "vuepress'theme",
   "main": "index.js",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vuejs/vuepress.git",
-    "directory": "packages/@vuepress/theme-default"
+    "url": "git+https://github.com/zhaopande/vuepress-theme-zp.git",
+    "directory": "vuepress-theme-zp"
   },
   "keywords": [
     "documentation",
@@ -17,18 +17,18 @@
     "vuepress",
     "generator"
   ],
-  "author": "Evan You",
+  "author": "zp",
   "maintainers": [
     {
-      "name": "ULIVZ",
-      "email": "chl814@foxmail.com"
+      "name": "zhaopan",
+      "email": "zhaopanhw@foxmail.com"
     }
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vuejs/vuepress/issues"
+    "url": "https://github.com/zhaopande/vuepress-theme-zp/issues"
   },
-  "homepage": "https://github.com/vuejs/vuepress/packages/@vuepress/theme-default#readme",
+  "homepage": "https://github.com/zhaopande/vuepress-theme-zp/blob/master/README.md",
   "dependencies": {
     "@vuepress/plugin-active-header-links": "^1.0.0-alpha.48",
     "@vuepress/plugin-nprogress": "^1.0.0-alpha.48",
