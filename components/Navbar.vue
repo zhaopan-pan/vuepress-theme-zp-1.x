@@ -17,7 +17,7 @@
         class="site-name"
         v-if="$siteTitle"
         :class="{ 'can-hide': $site.themeConfig.logo }"
-      >{{ $siteTitle }}222</span>
+      >{{ $siteTitle }}</span>
     </router-link>
 
     <div
