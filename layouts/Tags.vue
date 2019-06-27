@@ -1,17 +1,140 @@
 <template>
-  <div>tagsss页面</div>
+  <CommonLayout>
+    <div class="home">
+      <div class="tags">
+        <span
+          class="single-tag"
+          v-for="(item,index) in tagsList"
+          :key="index"
+          :class="{'active':currentSelectTag==item.name}"
+          :style="{ 'backgroundColor': item.color }"
+          @click="clickTag(item.name)"
+        >{{item.name||""}}</span>
+      </div>
+      <ArticleCard
+        class="blog-list"
+        :data="posts"
+        :currentPage="currentPage"
+        :currentTag="currentTag"
+        @currentTag="getCurrentTag"
+      ></ArticleCard>
+      <pagation
+        :data="posts"
+        :currentPage="currentPage"
+        @getCurrentPage="getCurrentPage"
+        :pageSize="pageSize"
+      ></pagation>
+    </div>
+  </CommonLayout>
 </template>
 
 <script>
+import CommonLayout from "./CommonLayout";
+import Home from "@theme/components/Home.vue";
+import Page from "@theme/components/Page.vue";
+import ArticleCard from "@theme/components/ArticleCard.vue";
+import Pagation from "../components/Pagation.vue";
+
+import { resolveSidebarItems } from "../util";
+
 export default {
-  name: "Tags",
+  components: { Home, Page, CommonLayout, ArticleCard, Pagation },
+
   data() {
-    return {};
+    return {
+      tagsList: [],
+      show: false,
+      currentSelectTag: "", //当前选中tag
+      posts: [], //文章list
+      currentPage: 1,
+      pageSize: 3
+    };
   },
+  created() {
+    const tags = this.$tags;
+    const currentTag = this.$route.query.tag
+      ? this.$route.query.tag
+      : this.$tags.list[0].name;
+
+    if (tags && tags.list) {
+      console.log(tags.list);
+      const tagArr = tags.list;
+      tagArr.map(item => {
+        item.color = this.tagColor();
+        return item;
+      });
+      this.tagsList = tagArr || [];
+      this.getArticleListByTag(currentTag);
+    }
+  },
+  computed: {},
+
   mounted() {
-    console.log(this.$tags.list);
+    console.log(this);
+  },
+
+  methods: {
+    clickTag: function(tagName) {
+      this.currentSelectTag = tagName;
+      this.getArticleListByTag(tagName);
+      console.log(this.list);
+    },
+    tagColor: function() {
+      const colorArr = ["#f26d6d", "#838282", "#3498db", "#67cc86", "#fb9b5f"];
+      const tagColorIndex = Math.floor(Math.random() * colorArr.length);
+      return colorArr[tagColorIndex];
+    },
+    // 筛选数据
+    getArticleListByTag: function(currentTag) {
+      this.currentSelectTag = currentTag;
+      let posts = this.$tags.map[currentTag].posts;
+
+      this.posts =
+        posts.length > 0
+          ? posts.sort((a, b) => {
+              return this.getTimeNum(b) - this.getTimeNum(a);
+            })
+          : [];
+      this.getCurrentPage(1);
+    },
+    // 获取时间的数字类型
+    getTimeNum(date) {
+      return parseInt(new Date(date.frontmatter.date).getTime());
+    },
+    getCurrentTag(tag) {
+      this.$emit("currentTag", tag);
+    },
+
+    getCurrentPage(page) {
+      console.log(page);
+      this.currentPage = page;
+      this.$page.currentPage = page;
+    }
   }
 };
-</script>
+</script>o
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.tags {
+  margin: 30px auto;
+
+  .single-tag {
+    padding: 5px 10px;
+    margin: 0px 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.8s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &.active {
+      transform: scale(1.2);
+    }
+  }
+}
+</style>

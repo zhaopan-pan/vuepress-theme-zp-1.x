@@ -29,9 +29,9 @@ export default {
         return []
       }
     },
-    perPage: {
+    pageSize: {
       type: Number,
-      default: 10
+      default: 3
     },
     currentPage: {
       type: Number,
@@ -40,7 +40,7 @@ export default {
   },
   computed:{
      pages () {
-       return Math.ceil(this.data.length / this.perPage)
+       return Math.ceil(this.data.length / this.pageSize)
      },
      show:function(){ 
          return this.pages && this.pages !=1 
