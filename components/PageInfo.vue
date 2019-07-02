@@ -1,7 +1,7 @@
 <template>
   <div>
     <i
-      class="iconfont zpicon-account"
+      class="iconfont zpicon-person"
       v-if="pageInfo.frontmatter.author || $themeConfig.author || $site.title"
     >
       <span>{{ pageInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>

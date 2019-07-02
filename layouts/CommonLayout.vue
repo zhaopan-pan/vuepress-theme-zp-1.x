@@ -30,8 +30,7 @@
       />
     </Page>-->
     <slot />
-    <i class="zpicon-up iconfont"></i>
-    <i class="zpicon-tag iconfont"></i>
+<BackToTop/>
   </div>
 </template>
 
@@ -40,10 +39,11 @@ import Home from "@theme/components/Home.vue";
 import Navbar from "@theme/components/Navbar.vue";
 import Page from "@theme/components/Page.vue";
 import Sidebar from "@theme/components/Sidebar.vue";
+import BackToTop from "@theme/components/BackToTop.vue";
 import { resolveSidebarItems } from "../util";
 
 export default {
-  components: { Home, Page, Sidebar, Navbar },
+  components: { Home, Page, Sidebar, Navbar,BackToTop },
 
   data() {
     return {

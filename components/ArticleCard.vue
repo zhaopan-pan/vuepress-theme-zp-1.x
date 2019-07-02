@@ -9,6 +9,9 @@
       <div class="title">
         <router-link :to="item.path">{{item.title}}</router-link>
       </div>
+      <i class="zpicon-up iconfont" />
+      <i class="zpicon-Stone-airplane iconfont" />
+      <i class="zpicon-aa iconfont" />
       <div class="abstract-info" v-html="item.excerpt"></div>
       <hr />
       <PageInfo :pageInfo="item" :currentTag="currentTag"></PageInfo>
@@ -73,21 +76,22 @@ export default {
       :after {
         content: '';
         position: absolute;
-        width: 100%;
+        width: 0%;
         height: 2px;
         bottom: 0;
-        left: 0;
+        right: 0;
         background-color: $accentColor;
         visibility: hidden;
-        -webkit-transform: scaleX(0);
-        transform: scaleX(0);
+        // -webkit-transform: scaleX(0);
+        // transform: scaleX(0);
         transition: 0.3s ease-in-out;
       }
 
       :hover:after {
         visibility: visible;
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
+        // -webkit-transform: scaleX(1);
+        // transform: scaleX(1);
+        width: 100%;
       }
     }
 
