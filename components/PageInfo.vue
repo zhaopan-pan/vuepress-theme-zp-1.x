@@ -1,22 +1,22 @@
 <template>
   <div>
     <i
-      class="iconfont reco-account"
+      class="iconfont zpicon-account"
       v-if="pageInfo.frontmatter.author || $themeConfig.author || $site.title"
     >
       <span>{{ pageInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
     </i>
-    <i class="iconfont reco-date" v-if="pageInfo.frontmatter.date">
+    <i class="iconfont zpicon-date" v-if="pageInfo.frontmatter.date">
       <span>{{ new Date(pageInfo.frontmatter.date).toLocaleDateString() }}</span>
     </i>
     <!-- <AccessNumber :idVal="pageInfo.path" :numStyle="numStyle"></AccessNumber> -->
-    <i class="iconfont reco-tag tags" v-if="pageInfo.frontmatter.tags">
+    <i class="iconfont zpicon-tag tags" v-if="pageInfo.frontmatter.tag">
       <span
-        v-for="(subItem, subIndex) in pageInfo.frontmatter.tags"
+        v-for="(subItem, subIndex) in pageInfo.frontmatter.tag"
         :key="subIndex"
         class="tag-item"
         :class="{ 'active': currentTag == subItem }"
-        @click="goTags(subItem)"
+        @click="goTags(pageInfo.frontmatter.tag)"
       >{{subItem}}</span>
     </i>
   </div>
@@ -39,10 +39,11 @@ export default {
   },
 
   mounted() {
-    console.log(this.pageInfo);
+    // console.log(this.pageInfo);
   },
   methods: {
     goTags(tag) {
+      console.log(tag);
       window.location.href = `/tag/?tag=${tag}`;
     }
   }
@@ -59,7 +60,7 @@ export default {
   }
 
   span {
-    margin-left: 0.5rem;
+    // margin-left: 0.5rem;
   }
 }
 
@@ -73,6 +74,7 @@ export default {
 
     &:hover {
       color: $accentColor;
+      transform: scale(1.15);
     }
   }
 }

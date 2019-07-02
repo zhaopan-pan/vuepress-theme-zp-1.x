@@ -70,8 +70,6 @@ export default {
         return !(home == true)
       })
       posts.sort((a, b) => {
-        console.log(a);
-        console.log(b);
         return this._getTimeNum(b) - this._getTimeNum(a)
       })
       console.log(posts);

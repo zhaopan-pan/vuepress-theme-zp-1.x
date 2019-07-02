@@ -17,6 +17,7 @@
         :data="posts"
         :currentPage="currentPage"
         @currentTag="getCurrentTag"
+        :pageSize="pageSize"
       ></ArticleCard>
 
       <pagation
@@ -47,8 +48,8 @@ export default {
       show: false,
       currentSelectTag: "", //当前选中tag
       posts: [], //文章list
-      currentPage: 1,
-      pageSize: 3
+      currentPage: 1,//页码
+      pageSize: 3,//每页条数
     };
   },
   created() {

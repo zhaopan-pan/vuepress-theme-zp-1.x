@@ -31,7 +31,7 @@ export default {
     },
     pageSize: {
       type: Number,
-      default: 3
+      default: 10
     },
     currentPage: {
       type: Number,

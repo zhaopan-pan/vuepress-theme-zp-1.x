@@ -38,7 +38,7 @@ module.exports = (options, ctx) => ({
         frontmatters: [
           {
             id: "tags",
-            keys: ['tag', 'tags'],
+            keys: ['tag'],//注册到元数据中的key
             path: '/tag/',
             layout: 'Tags',  //defaults to `FrontmatterKey.vue`
             frontmatter: { title: 'Tag' },

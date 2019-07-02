@@ -5,14 +5,16 @@
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
   >
-    <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar"/>
+   
+    <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
     <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
-      <slot name="sidebar-top" slot="top"/>
-      <slot name="sidebar-bottom" slot="bottom"/>
+      <slot name="sidebar-top" slot="top" />
+      <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
+    
     <!-- <Home v-if="$page.frontmatter.home"/>
     <Page
       v-else
@@ -27,7 +29,9 @@
         slot="bottom"
       />
     </Page>-->
-    <slot/>
+    <slot />
+    <i class="zpicon-up iconfont"></i>
+    <i class="zpicon-tag iconfont"></i>
   </div>
 </template>
 
@@ -129,3 +133,4 @@ export default {
 </script>
 
 <style src="prismjs/themes/prism-tomorrow.css"></style>
+<style src="../styles/theme.styl" lang="stylus"></style>
