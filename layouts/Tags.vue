@@ -11,13 +11,14 @@
           @click="clickTag(item.name)"
         >{{item.name||""}}</span>
       </div>
+        <!-- :currentTag="currentTag" -->
       <ArticleCard
         class="blog-list"
         :data="posts"
         :currentPage="currentPage"
-        :currentTag="currentTag"
         @currentTag="getCurrentTag"
       ></ArticleCard>
+
       <pagation
         :data="posts"
         :currentPage="currentPage"
@@ -86,9 +87,9 @@ export default {
     },
     // 筛选数据
     getArticleListByTag: function(currentTag) {
+      console.log(currentTag);
       this.currentSelectTag = currentTag;
-      let posts = this.$tags.map[currentTag].posts;
-
+      let posts = this.$tags.map[currentTag].pages;
       this.posts =
         posts.length > 0
           ? posts.sort((a, b) => {

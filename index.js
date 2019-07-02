@@ -19,8 +19,37 @@ module.exports = (options, ctx) => ({
   layoutDir: 'layouts',
   plugins: [
     ['@vuepress/active-header-links', options.activeHeaderLinks],
+    [
+      '@vuepress/blog',
+      {
+        directories: [
+          // {
+          //   id: 'Tags',
+          //   dirname: 'Tags',
+          //   path: '/',
+          //   // layout: 'IndexPost', defaults to `Layout.vue`
+          //   itemLayout: 'Tags',
+          //   itemPermalink: '/:year/:month/:day/:slug',
+          //   pagination: {
+          //     lengthPerPage: 5,
+          //   },
+          // },
+        ],
+        frontmatters: [
+          {
+            id: "tags",
+            keys: ['tag', 'tags'],
+            path: '/tag/',
+            layout: 'Tags',  //defaults to `FrontmatterKey.vue`
+            frontmatter: { title: 'Tag' },
+            pagination: {
+              lengthPerPage: 5
+            }
+          },
+        ]
+      },
+    ],
     '@vuepress/search',
-    '@vuepress/plugin-blog',
     '@vuepress/plugin-nprogress',
     ['container', {
       type: 'tip',
