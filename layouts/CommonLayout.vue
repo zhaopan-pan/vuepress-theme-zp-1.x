@@ -4,6 +4,7 @@
     :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
+    ref="mostTop"
   >
    
     <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
