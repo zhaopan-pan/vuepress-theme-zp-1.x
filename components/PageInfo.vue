@@ -89,5 +89,9 @@ export default {
     display: block;
     margin-left: 0 !important;
   }
+
+  .article-Info {
+    flex-wrap: wrap;
+  }
 }
 </style>
