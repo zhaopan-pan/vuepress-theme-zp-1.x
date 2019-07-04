@@ -1,13 +1,12 @@
 <template>
   <div
     class="theme-container"
-    :class="pageClasses"
+    :class="pageClasses,themeClass"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
     ref="mostTop"
   >
-   
-    <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
+    <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" @themeColor="colorValue" />
 
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
@@ -15,7 +14,7 @@
       <slot name="sidebar-top" slot="top" />
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
-    
+
     <!-- <Home v-if="$page.frontmatter.home"/>
     <Page
       v-else
@@ -31,7 +30,7 @@
       />
     </Page>-->
     <slot />
-<BackToTop/>
+    <BackToTop />
   </div>
 </template>
 
@@ -44,11 +43,12 @@ import BackToTop from "@theme/components/BackToTop.vue";
 import { resolveSidebarItems } from "../util";
 
 export default {
-  components: { Home, Page, Sidebar, Navbar,BackToTop },
+  components: { Home, Page, Sidebar, Navbar, BackToTop },
 
   data() {
     return {
-      isSidebarOpen: false
+      isSidebarOpen: false,
+      themeClass: []
     };
   },
 
@@ -128,10 +128,26 @@ export default {
           this.toggleSidebar(false);
         }
       }
+    },
+    colorValue: function(val) {
+      console.log(val);
+      // this.themeClass = {
+      //   "$accentColor": val
+      // };
+      this.themeClass = [
+        {
+          "black-theme": true
+        }
+      ];
+      console.log(this.$refs.mostTop.classList);
+
+      document.body.classList.add("black-theme");
     }
   }
 };
 </script>
 
 <style src="prismjs/themes/prism-tomorrow.css"></style>
+<style src="../styles/icon.styl" lang="stylus"></style>
 <style src="../styles/theme.styl" lang="stylus"></style>
+

@@ -24,15 +24,18 @@
       } : {}"
     >
       <!-- 颜色选择 -->
-      <i class="iconfont zpicon-chooseTheme" @click="chooseTheme">
+      <!-- <i class="iconfont zpicon-chooseTheme" @click:stop="chooseTheme">
         <div class="color-wheel">
           <div class="triangle"></div>
+          <div class="colors" @click="singleColor('#000')"></div>
+          <div class="colors"></div>
+          <div class="colors"></div>
           <div class="colors"></div>
           <div class="colors"></div>
           <div class="colors"></div>
           <div class="colors" style="marginRight:5%"></div>
         </div>
-      </i>
+      </i> -->
 
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox
@@ -91,6 +94,9 @@ export default {
   methods: {
     chooseTheme: function() {
       console.log(this.$refs);
+    },
+    singleColor:function(color){
+      this.$emit("themeColor",color)
     }
   }
 };
@@ -154,11 +160,11 @@ $navbar-horizontal-padding = 1.5rem;
       .color-wheel {
         position: absolute;
         width: 12rem;
-        height: 2.5rem;
+        height: 1.5rem;
         right: -6rem;
         top: 2.5rem;
         border: 1px solid #CCC;
-        border-radius: 5px;
+        border-radius: 0.2rem;
         background: #fff;
         display: flex;
         flex-direction: row;
@@ -190,7 +196,7 @@ $navbar-horizontal-padding = 1.5rem;
         }
 
         .colors {
-          width: 20%;
+          width: 10%;
           height: 80%;
           margin-left: 5%;
           background: green;
