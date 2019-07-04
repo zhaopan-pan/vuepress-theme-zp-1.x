@@ -24,10 +24,10 @@
       } : {}"
     >
       <!-- 颜色选择 -->
-      <!-- <i class="iconfont zpicon-chooseTheme" @click:stop="chooseTheme">
+      <i class="iconfont zpicon-chooseTheme" @click.prevent="chooseTheme">
         <div class="color-wheel">
           <div class="triangle"></div>
-          <div class="colors" @click="singleColor('#000')"></div>
+          <div class="colors" @click.stop="singleColor('#000')"></div>
           <div class="colors"></div>
           <div class="colors"></div>
           <div class="colors"></div>
@@ -35,7 +35,7 @@
           <div class="colors"></div>
           <div class="colors" style="marginRight:5%"></div>
         </div>
-      </i> -->
+      </i>
 
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox
