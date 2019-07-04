@@ -1,6 +1,6 @@
 <template>
-  <div class="back-top" ref="toTop" @click="onScroll" v-on:scroll.passive="onScroll">
-    <i class="zpicon-fly-body iconfont" />
+  <div class="back-top" ref="toTop" @click="scrollToTop">
+    <i class="zpicon-airplane iconfont" />
   </div>
 </template>
 
@@ -10,9 +10,10 @@ export default {
   components: {},
   data() {
     return {
-      offsetTopData: "",
+      fromTopNum: 0,
       toTopDom: "",
-      mostTop: ""
+      mostTop: "",
+      interVal: null
     };
   },
   props: {
@@ -25,18 +26,48 @@ export default {
     this.$nextTick(() => {
       console.log(window.innerHeight);
       console.log(document.body.scrollHeight);
-      console.log(this.$refs["toTop"].scrollTop);
-      this.offsetTopData = this.$refs["toTop"].offsetTop;
-      this.mostTop = this.$refs["mostTop"];
-      // this.$refs["toTop"].addEventListener("scroll", this.toTopDom);
+      this.toTopDom = this.$refs["toTop"];
+      // 通过$refs获取dom元素
+      // this.mostTop = this.$refs.toTop;
+      // 监听这个dom的scroll事件
+      window.addEventListener("scroll", this.handleScroll);
     });
   },
   methods: {
-    onScroll: function(e) {
-      console.log(document.body.offsetTop);
-      window.scrollTo(0, 0);
-      // document.body.scrollHeight - this.$refs["toTop"].offsetTop;
+    scrollToTop: function(e) {
+      this.backToTopFun();
+    },
+    handleScroll() {
+      console.log(window.pageYOffset);
+      this.fromTopNum = window.pageYOffset;
+      const { fromTopNum } = this;
+      if (fromTopNum > 60) {
+        console.log(this.toTopDom);
+        this.toTopDom.style.opacity = 1;
+      } else {
+        this.toTopDom.style.opacity = 0;
+      }
+    },
+    backToTopFun: function() {
+      const { fromTopNum } = this;
+      console.log(fromTopNum / 5);
+      const cutFromTopNum = Math.floor(fromTopNum / 15);
+      console.log(fromTopNum, cutFromTopNum);
+      let num = 0;
+      this.interVal = setInterval(() => {
+        let remainderNum = fromTopNum - cutFromTopNum * num;
+        console.log(remainderNum);
+        if (remainderNum < 1 || cutFromTopNum * num - fromTopNum > 0) {
+          clearInterval(this.interVal);
+        }
+        window.scrollTo(0, remainderNum);
+        num++;
+      }, 15);
     }
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+    this.interVal ? clearInterval(this.interVal) : "";
   }
 };
 </script>
@@ -48,12 +79,13 @@ export default {
   bottom: 5%;
   transform: scaleY(1);
   transition: all 0.8s;
+  opacity: 0;
 
   &:hover {
     transform: scaleY(1.5);
   }
 
-  .zpicon-fly-body {
+  .zpicon-airplane {
     font-size: 30px;
     cursor: pointer;
   }

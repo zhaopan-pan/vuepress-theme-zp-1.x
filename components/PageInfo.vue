@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="article-Info">
     <i
       class="iconfont zpicon-person"
       v-if="pageInfo.frontmatter.author || $themeConfig.author || $site.title"
@@ -10,7 +10,7 @@
       <span>{{ new Date(pageInfo.frontmatter.date).toLocaleDateString() }}</span>
     </i>
     <!-- <AccessNumber :idVal="pageInfo.path" :numStyle="numStyle"></AccessNumber> -->
-    <i class="iconfont zpicon-tag tags" v-if="pageInfo.frontmatter.tag">
+    <i class="iconfont zpicon-book1 tags" v-if="pageInfo.frontmatter.tag">
       <span
         v-for="(subItem, subIndex) in pageInfo.frontmatter.tag"
         :key="subIndex"
@@ -51,30 +51,35 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.iconfont {
-  display: inline-block;
-  line-height: 1.5rem;
+.article-Info {
+  display: flex;
+  justify-content: start;
 
-  &:not(:last-child) {
-    margin-right: 1rem;
-  }
+  .iconfont {
+    display: inline-block;
+    line-height: 1.5rem;
 
-  span {
-    // margin-left: 0.5rem;
-  }
-}
-
-.tags {
-  .tag-item {
-    cursor: pointer;
-
-    &.active {
-      color: $accentColor;
+    &:not(:last-child) {
+      margin-right: 1rem;
     }
 
-    &:hover {
-      color: $accentColor;
-      transform: scale(1.15);
+    span {
+      // margin-left: 0.5rem;
+    }
+  }
+
+  .tags {
+    .tag-item {
+      cursor: pointer;
+
+      &.active {
+        color: $accentColor;
+      }
+
+      &:hover {
+        color: $accentColor;
+        transform: scale(1.15);
+      }
     }
   }
 }

@@ -49,7 +49,7 @@ export default {
       currentSelectTag: "", //当前选中tag
       posts: [], //文章list
       currentPage: 1,//页码
-      pageSize: 3,//每页条数
+      pageSize: 10,//每页条数
     };
   },
   created() {

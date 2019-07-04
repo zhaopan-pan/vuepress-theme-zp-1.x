@@ -63,7 +63,7 @@ export default {
       return this.$page.frontmatter;
     },
     posts () {
-      console.log(this.$site);
+      // console.log(this.$site);
       let posts = this.$site.pages
       posts = posts.filter(item => {
         const { home, isTimeLine, date } = item.frontmatter
@@ -72,7 +72,7 @@ export default {
       posts.sort((a, b) => {
         return this._getTimeNum(b) - this._getTimeNum(a)
       })
-      console.log(posts);
+      // console.log(posts);
       return posts
     },
     actionLink() {
@@ -83,8 +83,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this);
-    console.log(this.$page);
+    // console.log(this);
+    // console.log(this.$page);
     // let posts = this.$site.pages;
     // posts = posts.filter(item => {
     //   const { home, date } = item.frontmatter;
