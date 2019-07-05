@@ -23,20 +23,7 @@
         'max-width': linksWrapMaxWidth + 'px'
       } : {}"
     >
-      <!-- 颜色选择 -->
-      <i class="iconfont zpicon-chooseTheme" @click.prevent="chooseTheme">
-        <div class="color-wheel">
-          <div class="triangle"></div>
-          <div class="colors" @click.stop="singleColor('#000')"></div>
-          <div class="colors"></div>
-          <div class="colors"></div>
-          <div class="colors"></div>
-          <div class="colors"></div>
-          <div class="colors"></div>
-          <div class="colors" style="marginRight:5%"></div>
-        </div>
-      </i>
-
+      <Theme />
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox
         v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"
@@ -51,9 +38,10 @@ import AlgoliaSearchBox from "@AlgoliaSearchBox";
 import SearchBox from "@SearchBox";
 import SidebarButton from "@theme/components/SidebarButton.vue";
 import NavLinks from "@theme/components/NavLinks.vue";
+import Theme from "@theme/components/Theme";
 
 export default {
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox },
+  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Theme },
 
   data() {
     return {
@@ -91,14 +79,7 @@ export default {
       return this.algolia && this.algolia.apiKey && this.algolia.indexName;
     }
   },
-  methods: {
-    chooseTheme: function() {
-      console.log(this.$refs);
-    },
-    singleColor:function(color){
-      this.$emit("themeColor",color)
-    }
-  }
+  methods: {}
 };
 
 function css(el, property) {
@@ -149,59 +130,6 @@ $navbar-horizontal-padding = 1.5rem;
     .search-box {
       flex: 0 0 auto;
       vertical-align: top;
-    }
-
-    .zpicon-chooseTheme {
-      width: 2rem;
-      height: 1.8rem;
-      font-size: 1.8rem;
-      position: relative;
-
-      .color-wheel {
-        position: absolute;
-        width: 12rem;
-        height: 1.5rem;
-        right: -6rem;
-        top: 2.5rem;
-        border: 1px solid #CCC;
-        border-radius: 0.2rem;
-        background: #fff;
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        align-items: center;
-
-        .triangle {
-          position: absolute;
-          left: 38%;
-          top: -20px;
-        }
-
-        .triangle:before, .triangle:after {
-          position: absolute;
-          content: '';
-          border-top: 10px transparent dashed;
-          border-left: 10px transparent dashed;
-          border-right: 10px transparent dashed;
-          border-bottom: 10px #fff solid;
-        }
-
-        .triangle:before {
-          border-bottom: 10px #ccc solid;
-        }
-
-        .triangle:after {
-          top: 1px;
-          border-bottom: 10px #fff solid;
-        }
-
-        .colors {
-          width: 10%;
-          height: 80%;
-          margin-left: 5%;
-          background: green;
-        }
-      }
     }
   }
 }

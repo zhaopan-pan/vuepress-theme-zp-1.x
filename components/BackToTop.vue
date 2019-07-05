@@ -44,8 +44,10 @@ export default {
       if (fromTopNum > 60) {
         // console.log(this.toTopDom);
         this.toTopDom.style.opacity = 1;
+        this.toTopDom.style.zIndex = 1;
       } else {
         this.toTopDom.style.opacity = 0;
+        this.toTopDom.style.zIndex = -1;
       }
     },
     backToTopFun: function() {
@@ -80,9 +82,11 @@ export default {
   transform: scaleY(1);
   transition: all 0.8s;
   opacity: 0;
+  z-index: -1;
 
   &:hover {
-    transform: scaleY(1.5);
+    // transform: scaleY(1.5);
+    z-index: -1;
   }
 
   .zpicon-airplane {
