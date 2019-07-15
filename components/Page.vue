@@ -1,13 +1,13 @@
 <template>
   <main class="page">
-    <slot name="top"/>
-
-    <Content class="theme-default-content"/>
+    <slot name="top" />
+    <Content class="theme-default-content" />
+    <TimeLine v-if="isTimeLine"></TimeLine>
 
     <footer class="page-edit">
       <div class="edit-link" v-if="editLink">
         <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
-        <OutboundLink/>
+        <OutboundLink />
       </div>
 
       <div class="last-updated" v-if="lastUpdated">
@@ -29,21 +29,23 @@
       </p>
     </div>
 
-    <slot name="bottom"/>
+    <slot name="bottom" />
   </main>
 </template>
 
 <script>
 import { resolvePage, outboundRE, endingSlashRE } from "../util";
-
+import TimeLine from '@theme/components/TimeLine'
 export default {
   props: ["sidebarItems"],
-
+  components: {TimeLine},
   computed: {
     lastUpdated() {
       return this.$page.lastUpdated;
     },
-
+    isTimeLine() {
+      return this.$page.frontmatter.isTimeLine;
+    },
     lastUpdatedText() {
       if (typeof this.$themeLocaleConfig.lastUpdated === "string") {
         return this.$themeLocaleConfig.lastUpdated;
@@ -171,6 +173,7 @@ function flatten(items, res) {
 @require '../styles/wrapper.styl';
 
 .page {
+  padding-top: 3rem;
   padding-bottom: 2rem;
   display: block;
 }

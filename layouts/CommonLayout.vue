@@ -10,7 +10,7 @@
 
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
-    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
+    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar" v-show="sidebarShow">
       <slot name="sidebar-top" slot="top" />
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
@@ -51,7 +51,12 @@ export default {
       themeClass: []
     };
   },
-
+  props: {
+    sidebarShow: {
+      type: Boolean,
+      default: true
+    }
+  },
   computed: {
     shouldShowNavbar() {
       const { themeConfig } = this.$site;

@@ -1,5 +1,5 @@
 <template>
-  <CommonLayout>
+  <CommonLayout :sidebarShow="false">
     <div class="home">
       <div class="tags">
         <span
@@ -11,7 +11,7 @@
           @click="clickTag(item.name)"
         >{{item.name||""}}</span>
       </div>
-        <!-- :currentTag="currentTag" -->
+      <!-- :currentTag="currentTag" -->
       <ArticleCard
         class="blog-list"
         :data="posts"
@@ -48,8 +48,8 @@ export default {
       show: false,
       currentSelectTag: "", //当前选中tag
       posts: [], //文章list
-      currentPage: 1,//页码
-      pageSize: 10,//每页条数
+      currentPage: 1, //页码
+      pageSize: 10 //每页条数
     };
   },
   created() {
@@ -82,7 +82,7 @@ export default {
       console.log(this.list);
     },
     tagColor: function() {
-      const colorArr = ["#f26d6d", "#838282", "#3498db", "#67cc86", "#fb9b5f"];
+      const colorArr = ["#b94e2b", "#a89090", "#03a9f4", "#33bf5e", "#e2be54"];
       const tagColorIndex = Math.floor(Math.random() * colorArr.length);
       return colorArr[tagColorIndex];
     },
