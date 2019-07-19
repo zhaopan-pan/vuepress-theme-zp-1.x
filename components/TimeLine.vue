@@ -4,11 +4,14 @@
       <li class="zp-timeline-item" :key="index" v-for="(item,index) in timeLineData">
         <div :class="!item.isyear?'zp-timeline-item__node':'zp-timeline-item__yearnode'"></div>
         <div class="zp-timeline-item__line" v-show="index<timeLineData.length-1"></div>
-        <div class="zp-timeline-item__wrapper">
-          <div class="zp-timeline-item__content" v-show="!item.isyear">{{item.title||""}}</div>
-          <div
-            :class="item.isyear?'zp-timeline-item__year':'zp-timeline-item__timestamp'"
-          >{{item.isyear?item.year||"":item.frontmatter.date||""}}</div>
+        <router-link :to="item.path" v-if="!item.isyear">
+          <div class="zp-timeline-item__wrapper">
+            <div class="zp-timeline-item__content">{{item.title||"-"}}</div>
+            <div class="zp-timeline-item__timestamp">{{item.frontmatter.date||"-"}}</div>
+          </div>
+        </router-link>
+        <div class="zp-timeline-item__wrapper" v-else>
+          <div class="zp-timeline-item__year">{{item.year||"-"}}</div>
         </div>
       </li>
     </ul>
