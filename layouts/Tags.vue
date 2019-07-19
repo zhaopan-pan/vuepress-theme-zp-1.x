@@ -1,5 +1,5 @@
 <template>
-  <CommonLayout :sidebarShow="false">
+  <CommonLayout>
     <div class="home">
       <div class="tags">
         <span
@@ -37,7 +37,7 @@ import Page from "@theme/components/Page.vue";
 import ArticleCard from "@theme/components/ArticleCard.vue";
 import Pagation from "../components/Pagation.vue";
 
-import { resolveSidebarItems } from "../util";
+import { getTimeToSecond, dateSortByTime } from "../util";
 
 export default {
   components: { Home, Page, CommonLayout, ArticleCard, Pagation },
@@ -91,18 +91,15 @@ export default {
       console.log(currentTag);
       this.currentSelectTag = currentTag;
       let posts = this.$tags.map[currentTag].pages;
-      this.posts =
-        posts.length > 0
-          ? posts.sort((a, b) => {
-              return this.getTimeNum(b) - this.getTimeNum(a);
-            })
-          : [];
+      this.posts = dateSortByTime(posts);
+      // posts.length > 0
+      //   ? posts.sort((a, b) => {
+      //       return getTimeToSecond(b) - getTimeToSecond(a);
+      //     })
+      //   : [];
       this.getCurrentPage(1);
     },
-    // 获取时间的数字类型
-    getTimeNum(date) {
-      return parseInt(new Date(date.frontmatter.date).getTime());
-    },
+
     getCurrentTag(tag) {
       this.$emit("currentTag", tag);
     },

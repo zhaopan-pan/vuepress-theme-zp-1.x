@@ -41,7 +41,7 @@ module.exports = (options, ctx) => ({
             keys: ['tag'],//注册到元数据中的key
             path: '/tag/',
             layout: 'Tags',  //defaults to `FrontmatterKey.vue`
-            frontmatter: { title: 'Tag' },
+            frontmatter: { title: 'Tag', sidebar: true },//注册页面的自定义元数据
             pagination: {
               lengthPerPage: 5
             }

@@ -10,7 +10,7 @@
 
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
-    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar" v-show="sidebarShow">
+    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
       <slot name="sidebar-top" slot="top" />
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
@@ -57,6 +57,7 @@ export default {
       default: true
     }
   },
+
   computed: {
     shouldShowNavbar() {
       const { themeConfig } = this.$site;
@@ -75,6 +76,8 @@ export default {
 
     shouldShowSidebar() {
       const { frontmatter } = this.$page;
+      console.log(frontmatter)
+      console.log(this.sidebarItems)
       return (
         !frontmatter.home &&
         frontmatter.sidebar !== false &&
@@ -105,6 +108,7 @@ export default {
   },
 
   mounted() {
+    console.log(this)
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });
@@ -112,6 +116,7 @@ export default {
 
   methods: {
     toggleSidebar(to) {
+      console.log(to);
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
     },
 

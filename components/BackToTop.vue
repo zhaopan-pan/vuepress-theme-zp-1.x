@@ -41,7 +41,7 @@ export default {
       // console.log(window.pageYOffset);
       this.fromTopNum = window.pageYOffset;
       const { fromTopNum } = this;
-      if (fromTopNum > 60) {
+      if (fromTopNum > 150) {
         // console.log(this.toTopDom);
         this.toTopDom.style.opacity = 1;
         this.toTopDom.style.zIndex = 1;
@@ -58,7 +58,6 @@ export default {
       let num = 0;
       this.interVal = setInterval(() => {
         let remainderNum = fromTopNum - cutFromTopNum * num;
-        console.log(remainderNum);
         if (remainderNum < 1 || cutFromTopNum * num - fromTopNum > 0) {
           clearInterval(this.interVal);
         }

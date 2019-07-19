@@ -4,7 +4,7 @@
     <Content class="theme-default-content" />
     <TimeLine v-if="isTimeLine"></TimeLine>
 
-    <footer class="page-edit">
+    <footer class="page-edit" v-if="!isTimeLine">
       <div class="edit-link" v-if="editLink">
         <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
         <OutboundLink />

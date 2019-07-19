@@ -1,37 +1,79 @@
 <template>
   <div class="timeline-page">
     <ul class="zp-timeline">
-      <li class="zp-timeline-item">
-        <div class="zp-timeline-item__node"></div>
-        <div class="zp-timeline-item__line"></div>
+      <li class="zp-timeline-item" :key="index" v-for="(item,index) in timeLineData">
+        <div :class="!item.isyear?'zp-timeline-item__node':'zp-timeline-item__yearnode'"></div>
+        <div class="zp-timeline-item__line" v-show="index<timeLineData.length-1"></div>
         <div class="zp-timeline-item__wrapper">
-          <div class="zp-timeline-item__content">支持使用图标</div>
-          <div class="zp-timeline-item__timestamp">04-12 20:46</div>
+          <div class="zp-timeline-item__content" v-show="!item.isyear">{{item.title||""}}</div>
+          <div
+            :class="item.isyear?'zp-timeline-item__year':'zp-timeline-item__timestamp'"
+          >{{item.isyear?item.year||"":item.frontmatter.date||""}}</div>
         </div>
       </li>
-      <li class="zp-timeline-item">
-        <div class="zp-timeline-item__yearnode"></div>
-        <div class="zp-timeline-item__line"></div>
-        <div class="zp-timeline-item__wrapper">
-          <div class="zp-timeline-item__year">2018</div>
-        </div>
-      </li>
-      <li class="zp-timeline-item"></li>
     </ul>
   </div>
 </template>
 
 <script>
+import { dateSortByTime } from "../util";
+
 export default {
   name: "TimeLine",
   props: {},
   data() {
-    return {};
+    return {
+      timeLineData: []
+    };
   },
   mounted() {
-    console.log(this.$site);
+    this.createTimeLineData();
   },
-  methods: {}
+  methods: {
+    createTimeLineData: function() {
+      console.log(this.$site.pages);
+      let allPageData = this.$site.pages;
+      if (allPageData.length == 0) return;
+      let needDealData = allPageData.filter(
+        item => item.frontmatter.home != true && item.frontmatter.date
+      );
+      console.log(needDealData);
+      this.timeLineData = this.addYearNode(dateSortByTime(needDealData));
+      console.log(this.timeLineData);
+    },
+    addYearNode: function(data) {
+      console.log(data);
+      let sortDataByYearArr = [];
+      let previousDate = 0;
+      data.map((item, index) => {
+        let currentYearDate = Number(item.frontmatter.date.split("-")[0]);
+        console.log(item);
+        let dateArr = item.frontmatter.date.split("-");
+        let monthDay = dateArr[1] + "-" + dateArr[2]; //月日
+        console.log(monthDay);
+        if (index == 0) {
+          //fisrt
+          item.frontmatter.date = monthDay;
+          sortDataByYearArr.push(item);
+          previousDate = currentYearDate;
+        } else if (previousDate != currentYearDate) {
+          //不同年份添加标记
+          previousDate = currentYearDate;
+          sortDataByYearArr.push({
+            year: currentYearDate,
+            isyear: true
+          });
+          item.frontmatter.date = monthDay;
+          sortDataByYearArr.push(item);
+        } else {
+          item.frontmatter.date = monthDay;
+          sortDataByYearArr.push(item);
+        }
+      });
+      console.log(sortDataByYearArr);
+      return sortDataByYearArr;
+    }
+  }
 };
 </script>
 
@@ -51,9 +93,11 @@ export default {
     position: relative;
     padding-bottom: 20px;
     cursor: pointer;
+    transition: all 0.5s;
 
     &:hover {
       color: $accentColor;
+
       .zp-timeline-item__node:before {
         background-color: $accentColor;
       }
@@ -61,9 +105,9 @@ export default {
 
     .zp-timeline-item__node:before {
       content: ' ';
-      left: -1px;
-      width: 12px;
-      height: 12px;
+      left: 0px;
+      width: 9px;
+      height: 9px;
       position: absolute;
       background-color: #e4e7ed;
       border-radius: 50%;
@@ -71,12 +115,13 @@ export default {
       justify-content: center;
       align-items: center;
       z-index: 1;
+      transition: all 0.5s;
     }
 
     .zp-timeline-item__yearnode {
       left: -2px;
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
       position: absolute;
       background-color: #e4e7ed;
       border-radius: 50%;

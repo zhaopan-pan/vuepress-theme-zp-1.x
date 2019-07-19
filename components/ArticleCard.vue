@@ -54,7 +54,7 @@ export default {
 
   .abstract-item {
     margin: 0 auto 20px;
-    padding: 16px 20px;
+    padding: 1rem 1.1rem;
     width: 100%;
     overflow: hidden;
     border-radius: 2px;

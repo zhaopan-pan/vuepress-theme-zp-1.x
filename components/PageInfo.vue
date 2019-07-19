@@ -60,7 +60,7 @@ export default {
     line-height: 1.5rem;
 
     &:not(:last-child) {
-      margin-right: 1rem;
+      margin-right: 0.8rem;
     }
 
     span {
