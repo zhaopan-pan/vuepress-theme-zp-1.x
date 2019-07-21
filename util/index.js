@@ -256,3 +256,26 @@ export function dateSortByTime(date) {
 export function getTimeToSecond(date) {
   return parseInt(new Date(date.frontmatter.date).getTime());
 }
+
+/**
+ * 数组、对象的深拷贝
+ * @param {Object|Array} arg 
+ */
+export function deepCopy(arg) {
+  if (arg instanceof Array) {
+    let n = [];
+    for (let i = 0; i < arg.length; ++i) {
+      n[i] = deepCopy(arg[i]);
+    }
+    return n;
+
+  } else if (arg instanceof Object) {
+    let n = {};
+    for (let i in arg) {
+      n[i] = deepCopy(arg[i]);
+    }
+    return n;
+  } else {
+    return arg;
+  }
+}

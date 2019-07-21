@@ -63,7 +63,7 @@ export default {
       return this.$page.frontmatter;
     },
     posts () {
-      // console.log(this.$site);
+      console.log(this.$site);
       let posts = this.$site.pages
       posts = posts.filter(item => {
         const { home, isTimeLine, date } = item.frontmatter
