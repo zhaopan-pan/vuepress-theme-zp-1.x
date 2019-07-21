@@ -143,7 +143,7 @@ export default {
       width: 13px;
       height: 13px;
       position: absolute;
-      background-color: #d5d1e8;
+      background-color: #e4e7ed;
       border-radius: 50%;
       display: flex;
       justify-content: center;
