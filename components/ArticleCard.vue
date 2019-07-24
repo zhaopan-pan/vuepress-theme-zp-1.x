@@ -9,9 +9,9 @@
       <div class="title">
         <router-link :to="item.path">{{item.title}}</router-link>
       </div>
-      <i class="zpicon-up iconfont" />
+      <!-- <i class="zpicon-up iconfont" />
       <i class="zpicon-Stone-airplane iconfont" />
-      <i class="zpicon-date iconfont" />
+      <i class="zpicon-date iconfont" /> -->
       <div class="abstract-info" v-html="item.excerpt"></div>
       <hr />
       <PageInfo :pageInfo="item" :currentTag="currentTag"></PageInfo>
