@@ -23,11 +23,7 @@
       <!-- 博客列表 -->
       <ArticleCard class="blog-list" :data="posts" :currentPage="1"></ArticleCard>
       <div class="blogger-info">
-        <img
-          class="personal-img"
-          :src="$page.frontmatter.faceImage || $themeConfig.logo"
-          alt="hero"
-        />
+        <img class="personal-img" :src="$withBase($themeConfig.logo)" alt="hero" />
         <h3
           class="name"
           v-if="$themeConfig.author || $site.title"
@@ -85,7 +81,7 @@ export default {
   },
   mounted() {
     // console.log(this);
-    // console.log(this.$page);
+    console.log(this.$page);
     // let posts = this.$site.pages;
     // posts = posts.filter(item => {
     //   const { home, date } = item.frontmatter;
