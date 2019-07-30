@@ -63,8 +63,8 @@ export default {
       console.log(this.$site);
       let posts = this.$site.pages;
       posts = posts.filter(item => {
-        const { home, isTimeLine, date } = item.frontmatter;
-        return !(home == true);
+        const { home, isTimeLine, date, tag } = item.frontmatter;
+        return !(home == true || date === undefined || tag === undefined);
       });
       posts.sort((a, b) => {
         return this._getTimeNum(b) - this._getTimeNum(a);
@@ -81,7 +81,7 @@ export default {
   },
   mounted() {
     // console.log(this);
-    console.log(this.$page);
+    console.log(this.posts);
     // let posts = this.$site.pages;
     // posts = posts.filter(item => {
     //   const { home, date } = item.frontmatter;

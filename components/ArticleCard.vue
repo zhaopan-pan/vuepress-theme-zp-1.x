@@ -11,19 +11,19 @@
       </div>
       <!-- <i class="zpicon-up iconfont" />
       <i class="zpicon-Stone-airplane iconfont" />
-      <i class="zpicon-date iconfont" /> -->
-      <div class="abstract-info" v-html="item.excerpt"></div>
+      <i class="zpicon-date iconfont" />-->
+      <div class="abstract-info" v-html="item.excerpt" v-if="item.excerpt"></div>
       <hr />
-      <PageInfo :pageInfo="item" :currentTag="currentTag"></PageInfo>
+      <ArticleInfo :articleInfo="item" :currentTag="currentTag"></ArticleInfo>
     </div>
   </div>
 </template>
 
 <script>
-import PageInfo from "./PageInfo";
+import ArticleInfo from "./ArticleInfo";
 
 export default {
-  components: { PageInfo },
+  components: { ArticleInfo },
   props: {
     data: {
       type: Array,

@@ -2,32 +2,35 @@
   <div class="article-Info">
     <i
       class="iconfont zpicon-person"
-      v-if="pageInfo.frontmatter.author || $themeConfig.author || $site.title"
+      v-if="articleInfo.frontmatter.author || $themeConfig.author || $site.title"
     >
-      <span>{{ pageInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
+      <span>{{ articleInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
     </i>
-    <i class="iconfont zpicon-date" v-if="pageInfo.frontmatter.date">
-      <span>{{ new Date(pageInfo.frontmatter.date).toLocaleDateString() }}</span>
+    <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date">
+      <span>{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span>
     </i>
-    <!-- <AccessNumber :idVal="pageInfo.path" :numStyle="numStyle"></AccessNumber> -->
-    <i class="iconfont zpicon-book1 tags" v-if="pageInfo.frontmatter.tag">
+    <!-- <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date"></i> -->
+    <!-- <span>{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span> -->
+    <i class="iconfont zpicon-book1 tags" v-if="articleInfo.frontmatter.tag">
       <span
-        v-for="(subItem, subIndex) in pageInfo.frontmatter.tag"
+        v-for="(subItem, subIndex) in articleInfo.frontmatter.tag"
         :key="subIndex"
         class="tag-item"
         :class="{ 'active': currentTag == subItem }"
-        @click="goTags(pageInfo.frontmatter.tag)"
+        @click="goTags(articleInfo.frontmatter.tag)"
       >{{subItem}}</span>
     </i>
   </div>
 </template>
+<!-- <AccessNumber :idVal="articleInfo.path" :numStyle="numStyle"></AccessNumber> -->
 
 <script>
 // import AccessNumber from "./Valine/AccessNumber";
 
 export default {
   // components: { AccessNumber },
-  props: ["pageInfo", "currentTag"],
+  name: "ArticleInfo",
+  props: ["articleInfo", "currentTag"],
   data() {
     return {
       numStyle: {
@@ -39,7 +42,7 @@ export default {
   },
 
   mounted() {
-    // console.log(this.pageInfo);
+    console.log(this.articleInfo.frontmatter.date);
   },
   methods: {
     goTags(tag) {

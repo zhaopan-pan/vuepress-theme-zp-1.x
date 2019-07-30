@@ -48,8 +48,8 @@ export default {
       show: false,
       currentSelectTag: "", //当前选中tag
       posts: [], //文章list
-      currentPage: 1, //页码
-      pageSize: 10 //每页条数
+      currentPage: Number(1), //页码
+      pageSize: 3 //每页条数
     };
   },
   created() {
@@ -105,8 +105,7 @@ export default {
     },
 
     getCurrentPage(page) {
-      console.log(page);
-      this.currentPage = page;
+      this.currentPage = Number(page);
       this.$page.currentPage = page;
     }
   }
