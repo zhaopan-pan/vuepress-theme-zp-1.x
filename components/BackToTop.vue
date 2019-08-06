@@ -45,9 +45,11 @@ export default {
         // console.log(this.toTopDom);
         this.toTopDom.style.opacity = 1;
         this.toTopDom.style.zIndex = 1;
+        this.toTopDom.style.bottom = "5%";
       } else {
         this.toTopDom.style.opacity = 0;
         this.toTopDom.style.zIndex = -1;
+        this.toTopDom.style.bottom = "-5%";
       }
     },
     backToTopFun: function() {
@@ -77,9 +79,9 @@ export default {
 .back-top {
   position: fixed;
   right: 10%;
-  bottom: 5%;
+  bottom: -5%;
   transform: scaleY(1);
-  transition: all 0.8s;
+  transition: all 0.5s;
   opacity: 0;
   z-index: -1;
 

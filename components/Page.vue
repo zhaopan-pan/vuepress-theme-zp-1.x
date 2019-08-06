@@ -1,7 +1,12 @@
 <template>
   <main class="page">
     <slot name="top" />
-    <Content class="theme-default-content" />
+    <div class="theme-default-content">
+      <h1 class="article-title" v-if="isAticle">{{page.title||page.frontmatter.title||"-"}}</h1>
+      <ArticleInfo :articleInfo="page" :currentTag="page.tag" v-if="isAticle" class="custom"></ArticleInfo>
+      <hr />
+      <Content />
+    </div>
     <TimeLine v-if="isTimeLine"></TimeLine>
 
     <footer class="page-edit" v-if="!isTimeLine">
@@ -35,16 +40,27 @@
 
 <script>
 import { resolvePage, outboundRE, endingSlashRE } from "../util";
-import TimeLine from '@theme/components/TimeLine'
+import TimeLine from "@theme/components/TimeLine";
+import ArticleInfo from "./ArticleInfo";
+
 export default {
   props: ["sidebarItems"],
-  components: {TimeLine},
+  components: { TimeLine, ArticleInfo },
   computed: {
     lastUpdated() {
       return this.$page.lastUpdated;
     },
     isTimeLine() {
       return this.$page.frontmatter.isTimeLine;
+    },
+    isAticle() {
+      return (
+        !this.$page.frontmatter.isTimeLine &&
+        this.$page.frontmatter.sidebar == false
+      );
+    },
+    page() {
+      return this.$page;
     },
     lastUpdatedText() {
       if (typeof this.$themeLocaleConfig.lastUpdated === "string") {
@@ -109,7 +125,10 @@ export default {
       );
     }
   },
-
+  mounted() {
+    console.log(this.$page);
+    console.log(this.isAticle);
+  },
   methods: {
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {
       const bitbucket = /bitbucket.org/;
@@ -171,6 +190,11 @@ function flatten(items, res) {
 
 <style lang="stylus">
 @require '../styles/wrapper.styl';
+
+// 文章标题
+.article-title {
+  // padding-top: 3rem  !important
+}
 
 .page {
   padding-top: 3rem;
