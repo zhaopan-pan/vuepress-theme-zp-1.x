@@ -33,14 +33,13 @@
 <script>
 import CommonLayout from "./CommonLayout";
 import Home from "@theme/components/Home.vue";
-import Page from "@theme/components/Page.vue";
 import ArticleCard from "@theme/components/ArticleCard.vue";
 import Pagation from "../components/Pagation.vue";
 
 import { getTimeToSecond, dateSortByTime } from "../util";
 
 export default {
-  components: { Home, Page, CommonLayout, ArticleCard, Pagation },
+  components: { Home, CommonLayout, ArticleCard, Pagation },
 
   data() {
     return {
@@ -110,21 +109,20 @@ export default {
     }
   }
 };
-</script>o
-
+</script>
 <style lang="stylus" scoped>
 .tags {
   margin: 30px auto;
 
   .single-tag {
     padding: 5px 10px;
-    margin: 0px 5px;
+    margin: 5px;
     border-radius: 4px;
     display: inline-flex;
     color: #fff;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    transition: all 0.8s;
+    transition: all 0.9s;
 
     &:hover {
       transform: scale(1.05);

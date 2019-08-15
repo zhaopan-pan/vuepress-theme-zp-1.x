@@ -1,5 +1,5 @@
 <template>
-  <main class="home" aria-labelledby="main-title">
+  <main class="home" aria-labelledby="main-title" :class="pageShow?'zp-show': 'zp-hide'">
     <!-- 官方home -->
     <!-- <header class="hero"> -->
     <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" :alt="data.heroAlt || 'hero'" /> -->
@@ -31,9 +31,7 @@
             <i class="zpicon-Stone-airplane iconfont" />
             <i class="zpicon-date iconfont" />
           </div>
-          <div>
-            {{$tags.length}}
-          </div>
+          <div>{{$tags.length}}</div>
         </div>
       </div>
     </div>
@@ -51,6 +49,11 @@ import { posix } from "path";
 
 export default {
   components: { NavLink, ArticleCard },
+  data() {
+    return {
+      pageShow: false
+    };
+  },
   computed: {
     data() {
       return this.$page.frontmatter;
@@ -76,6 +79,7 @@ export default {
     }
   },
   mounted() {
+    this.pageShow = true;
     // console.log(this);
     console.log(this.posts);
     // let posts = this.$site.pages;
@@ -99,6 +103,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@require '../styles/loadMixin.styl';
+
 .home {
   padding: $navbarHeight 2rem 0;
   margin: 0px auto;
@@ -340,5 +346,13 @@ export default {
       }
     }
   }
+}
+
+.zp-show {
+  load-end(0.08s);
+}
+
+.zp-hide {
+  load-start();
 }
 </style>

@@ -1,10 +1,12 @@
 <template>
   <CommonLayout>
-    <Home v-if="$page.frontmatter.home"/>
-    <Page v-else :sidebar-items="sidebarItems">
-      <slot name="page-top" slot="top"/>
-      <slot name="page-bottom" slot="bottom"/>
-    </Page>
+    <div :class="pageShow?'zp-show': 'zp-hide'">
+      <Home v-if="$page.frontmatter.home" />
+      <Page v-else :sidebar-items="sidebarItems">
+        <slot name="page-top" slot="top" />
+        <slot name="page-bottom" slot="bottom" />
+      </Page>
+    </div>
   </CommonLayout>
 </template>
 
@@ -16,6 +18,11 @@ import { resolveSidebarItems } from "../util";
 
 export default {
   components: { Home, Page, CommonLayout },
+  data() {
+    return {
+      pageShow: false
+    };
+  },
   computed: {
     sidebarItems() {
       return resolveSidebarItems(
@@ -29,6 +36,7 @@ export default {
 
   mounted() {
     console.log(location);
+    this.pageShow = true;
   },
 
   methods: {}
@@ -37,3 +45,13 @@ export default {
 
 <style src="prismjs/themes/prism-tomorrow.css"></style>
 <style src="../styles/theme/index.styl" lang="stylus"></style>
+<style src="../styles/loadMixin.styl" lang="stylus"></style>
+<style lang="stylus">
+.zp-show {
+  load-end(0.08s);
+}
+
+.zp-hide {
+  load-start();
+}
+</style>

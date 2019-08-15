@@ -4,7 +4,7 @@
     <div class="theme-default-content">
       <h1 class="article-title" v-if="isAticle">{{page.title||page.frontmatter.title||"-"}}</h1>
       <ArticleInfo :articleInfo="page" :currentTag="page.tag" v-if="isAticle" class="custom"></ArticleInfo>
-      <hr />
+      <hr  v-if="isAticle"/>
       <Content />
     </div>
     <TimeLine v-if="isTimeLine"></TimeLine>
@@ -56,7 +56,8 @@ export default {
     isAticle() {
       return (
         !this.$page.frontmatter.isTimeLine &&
-        this.$page.frontmatter.sidebar == false
+        this.$page.frontmatter.sidebar == false &&
+        !this.$page.frontmatter.noTitle == true
       );
     },
     page() {
