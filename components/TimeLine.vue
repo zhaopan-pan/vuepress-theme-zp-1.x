@@ -9,7 +9,7 @@
       >
         <div :class="!item.isyear?'zp-timeline-item__node':'zp-timeline-item__yearnode'"></div>
         <div class="zp-timeline-item__line" v-show="index<timeLineData.length-1"></div>
-        <div class="zp-timeline-item__wrapper" v-if="!item.isyear">
+        <div class="zp-timeline-item__wrapper border_bottom" v-if="!item.isyear">
           <div class="zp-timeline-item__content">{{item.title||"-"}}</div>
           <div class="zp-timeline-item__timestamp">{{item.frontmatter.date||"-"}}</div>
         </div>
@@ -158,9 +158,13 @@ export default {
       border-left: 2px solid #e4e7ed;
     }
 
+    .border_bottom {
+      border-bottom: 1px solid #e4e7ed;
+    }
+
     .zp-timeline-item__wrapper {
       position: relative;
-      padding-left: 28px;
+      margin-left: 28px;
       top: -3px;
       cursor: pointer;
 
