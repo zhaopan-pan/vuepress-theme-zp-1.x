@@ -30,6 +30,7 @@
       />
     </Page>-->
     <slot />
+    <Valine />
     <BackToTop />
   </div>
 </template>
@@ -40,10 +41,11 @@ import Navbar from "@theme/components/Navbar.vue";
 import Page from "@theme/components/Page.vue";
 import Sidebar from "@theme/components/Sidebar.vue";
 import BackToTop from "@theme/components/BackToTop.vue";
+import Valine from "@theme/components/Valine";
 import { resolveSidebarItems } from "../util";
 
 export default {
-  components: { Home, Page, Sidebar, Navbar, BackToTop},
+  components: { Home, Page, Sidebar, Navbar, BackToTop, Valine },
 
   data() {
     return {

@@ -6,20 +6,28 @@
 
 <script>
 import { isActive, hashRE, groupHeaders } from "../../util";
+import Valine from 'valine';
 export default {
+  name:"Valine",
   computed: {
     data() {
       return this.$page.frontmatter;
     }
   },
-  mounted: function() {
+  mounted() {
+    console.log("来了！！！！");
     this.createValine();
   },
 
   methods: {
     createValine() {
-      const Valine = require("valine");
-      window.AV = require("leancloud-storage");
+      //  = require("leancloud-storage")
+      if (typeof window !== "undefined") {
+        this.window = window;
+        window.AV = require('leancloud-storage');
+      }
+      // const Valine = require('valine');
+      console.log(Valine);
       const valine = new Valine({
         el: "#vcomments",
         appId: "GW2fsulTOfGFPWhOAkNBu9Wm-gzGzoHsz",
@@ -28,7 +36,8 @@ export default {
         verify: false,
         avatar: "monsterid",
         path: window.location.pathname,
-        placeholder: "just go go"
+        placeholder: "just go go",
+        visitor: true // 阅读量统计
       });
       this.valineRefresh = false;
     }
