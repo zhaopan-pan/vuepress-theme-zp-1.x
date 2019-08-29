@@ -43,7 +43,7 @@ import BackToTop from "@theme/components/BackToTop.vue";
 import { resolveSidebarItems } from "../util";
 
 export default {
-  components: { Home, Page, Sidebar, Navbar, BackToTop },
+  components: { Home, Page, Sidebar, Navbar, BackToTop},
 
   data() {
     return {
@@ -76,8 +76,8 @@ export default {
 
     shouldShowSidebar() {
       const { frontmatter } = this.$page;
-      console.log(frontmatter)
-      console.log(this.sidebarItems)
+      console.log(frontmatter);
+      console.log(this.sidebarItems);
       return (
         !frontmatter.home &&
         frontmatter.sidebar !== false &&
@@ -108,7 +108,7 @@ export default {
   },
 
   mounted() {
-    console.log(this)
+    console.log(this);
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });
