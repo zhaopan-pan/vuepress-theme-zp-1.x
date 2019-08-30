@@ -19,7 +19,7 @@
     <div class="home-blog">
       <!-- 博客列表 -->
       <ArticleCard class="blog-list" :data="posts" :currentPage="1"></ArticleCard>
-      <div class="blogger-info">
+      <div class="blog-review">
         <img class="personal-img" :src="$withBase($themeConfig.logo)" alt="hero" />
         <h3
           class="name"
@@ -117,7 +117,7 @@ export default {
     margin: 20px auto 0;
     max-width: 1126px;
 
-    .blogger-info {
+    .blog-review {
       transition: all 0.3s;
       margin-left: 15px;
       width: 380px;
@@ -305,7 +305,7 @@ export default {
       padding: 0 2.5rem;
     }
 
-    .blogger-info {
+    .blog-review {
       display: none;
     }
   }

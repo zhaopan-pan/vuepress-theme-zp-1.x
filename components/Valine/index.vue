@@ -6,9 +6,9 @@
 
 <script>
 import { isActive, hashRE, groupHeaders } from "../../util";
-import Valine from 'valine';
+import Valine from "valine";
 export default {
-  name:"Valine",
+  name: "Valine",
   computed: {
     data() {
       return this.$page.frontmatter;
@@ -21,23 +21,24 @@ export default {
 
   methods: {
     createValine() {
-      //  = require("leancloud-storage")
+       const valineConfig = this.$themeConfig.valineConfig
+       if(!valineConfig)return;
       if (typeof window !== "undefined") {
         this.window = window;
-        window.AV = require('leancloud-storage');
+        window.AV = require("leancloud-storage");
       }
-      // const Valine = require('valine');
-      console.log(Valine);
+      console.log(valineConfig);
       const valine = new Valine({
         el: "#vcomments",
-        appId: "GW2fsulTOfGFPWhOAkNBu9Wm-gzGzoHsz",
-        appKey: "bpvMmVf4m5D9KoSWsKVDYnUP",
-        notify: false,
-        verify: false,
-        avatar: "monsterid",
-        path: window.location.pathname,
-        placeholder: "just go go",
-        visitor: true // 阅读量统计
+        appId: valineConfig.appId, 
+        appKey: valineConfig.appKey, 
+        placeholder: valineConfig.placeholder || "just go go",
+        notify: valineConfig.notify || false,
+        verify: valineConfig.verify || false,
+        avatar: valineConfig.avatar || "monsterid",
+        visitor: valineConfig.visitor || true, // 阅读量统计
+        recordIP: valineConfig.recordIP || false,
+        path: window.location.pathname
       });
       this.valineRefresh = false;
     }
