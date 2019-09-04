@@ -30,7 +30,7 @@
       />
     </Page>-->
     <slot />
-    <!-- <Valine v-if="isShowComment" /> -->
+    <Valine v-if="isShowComment" />
     <BackToTop />
   </div>
 </template>
