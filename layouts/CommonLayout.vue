@@ -30,7 +30,7 @@
       />
     </Page>-->
     <slot />
-    <Valine />
+    <!-- <Valine v-if="isShowComment" /> -->
     <BackToTop />
   </div>
 </template>
@@ -45,7 +45,14 @@ import Valine from "@theme/components/Valine";
 import { resolveSidebarItems } from "../util";
 
 export default {
-  components: { Home, Page, Sidebar, Navbar, BackToTop, Valine },
+  components: {
+    Home,
+    Page,
+    Sidebar,
+    Navbar,
+    BackToTop,
+    Valine
+  },
 
   data() {
     return {
@@ -61,6 +68,9 @@ export default {
   },
 
   computed: {
+    isShowComment() {
+      return this.$page.frontmatter.comments;
+    },
     shouldShowNavbar() {
       const { themeConfig } = this.$site;
       const { frontmatter } = this.$page;

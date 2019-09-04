@@ -6,7 +6,6 @@
 
 <script>
 import { isActive, hashRE, groupHeaders } from "../../util";
-import Valine from "valine";
 export default {
   name: "Valine",
   computed: {
@@ -21,17 +20,21 @@ export default {
 
   methods: {
     createValine() {
-       const valineConfig = this.$themeConfig.valineConfig
-       if(!valineConfig)return;
+      const valineConfig = this.$themeConfig.valineConfig;
+      if (!valineConfig) return;
+      const AV = require("leancloud-storage");
+      const Valine = require("valine");
       if (typeof window !== "undefined") {
         this.window = window;
-        window.AV = require("leancloud-storage");
+        window.AV = AV;
+      } else {
+        return;
       }
       console.log(valineConfig);
       const valine = new Valine({
         el: "#vcomments",
-        appId: valineConfig.appId, 
-        appKey: valineConfig.appKey, 
+        appId: valineConfig.appId,
+        appKey: valineConfig.appKey,
         placeholder: valineConfig.placeholder || "just go go",
         notify: valineConfig.notify || false,
         verify: valineConfig.verify || false,
