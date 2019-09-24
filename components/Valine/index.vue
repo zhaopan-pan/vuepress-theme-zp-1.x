@@ -30,7 +30,6 @@ export default {
       } else {
         return;
       }
-      console.log(valineConfig);
       const valine = new Valine({
         el: "#vcomments",
         appId: valineConfig.appId,

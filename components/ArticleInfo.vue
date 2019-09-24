@@ -4,14 +4,14 @@
       class="iconfont zpicon-person"
       v-if="articleInfo.frontmatter.author || $themeConfig.author || $site.title"
     >
-      <span>{{ articleInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
+      <span class="ml5">{{ articleInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
     </i>
     <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date">
-      <span>{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span>
+      <span class="ml5">{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span>
     </i>
     <!-- <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date"></i> -->
     <!-- <span>{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span> -->
-    <i class="iconfont zpicon-book1 tags" v-if="articleInfo.frontmatter.tag">
+    <!-- <i class="iconfont zpicon-book1 tags" v-if="articleInfo.frontmatter.tag">
       <span
         v-for="(subItem, subIndex) in articleInfo.frontmatter.tag"
         :key="subIndex"
@@ -19,18 +19,22 @@
         :class="{ 'active': currentTag == subItem }"
         @click="goTags(articleInfo.frontmatter.tag)"
       >{{subItem}}</span>
-    </i>
+    </i>-->
+    <AccessCount :path="articleInfo.path"/>
   </div>
 </template>
 <!-- <AccessNumber :idVal="articleInfo.path" :numStyle="numStyle"></AccessNumber> -->
 
 <script>
-// import AccessNumber from "./Valine/AccessNumber";
+import AccessCount from "./Valine/AccessCount";
 
 export default {
-  // components: { AccessNumber },
+  components: { AccessCount },
   name: "ArticleInfo",
   props: ["articleInfo", "currentTag"],
+  mounted() {
+
+  },
   data() {
     return {
       numStyle: {
@@ -42,7 +46,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.articleInfo.frontmatter.date);
+    console.log(this.articleInfo);
   },
   methods: {
     goTags(tag) {
@@ -74,6 +78,10 @@ export default {
   .tags {
     .tag-item {
       cursor: pointer;
+
+      &:first-child {
+        margin-left: 0.5rem;
+      }
 
       &.active {
         color: $accentColor;
