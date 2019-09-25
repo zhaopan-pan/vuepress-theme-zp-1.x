@@ -1,5 +1,5 @@
 <template>
-  <i class="iconfont zpicon-view">
+  <i class="iconfont zpicon-view" v-if="path!='/'">
     <!-- id 将作为查询条件 -->
     <span :id="getPath(path)" class="leancloud_visitors ml5" data-flag-title="Your Article Title">
       <span class="leancloud-visitors-count"></span>
@@ -17,7 +17,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.path);
     console.log(this.getPath(this.path));
   },
   methods: {

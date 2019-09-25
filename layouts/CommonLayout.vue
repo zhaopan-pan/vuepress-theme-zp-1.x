@@ -88,8 +88,6 @@ export default {
 
     shouldShowSidebar() {
       const { frontmatter } = this.$page;
-      console.log(frontmatter);
-      console.log(this.sidebarItems);
       return (
         !frontmatter.home &&
         frontmatter.sidebar !== false &&

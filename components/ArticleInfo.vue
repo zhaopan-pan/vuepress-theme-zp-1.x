@@ -11,7 +11,7 @@
     </i>
     <!-- <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date"></i> -->
     <!-- <span>{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span> -->
-    <!-- <i class="iconfont zpicon-book1 tags" v-if="articleInfo.frontmatter.tag">
+    <i class="iconfont zpicon-book1 tags" v-if="articleInfo.frontmatter.tag">
       <span
         v-for="(subItem, subIndex) in articleInfo.frontmatter.tag"
         :key="subIndex"
@@ -19,8 +19,8 @@
         :class="{ 'active': currentTag == subItem }"
         @click="goTags(articleInfo.frontmatter.tag)"
       >{{subItem}}</span>
-    </i>-->
-    <AccessCount :path="articleInfo.path"/>
+    </i>
+    <AccessCount :path="isList?'/':articleInfo.path" />
   </div>
 </template>
 <!-- <AccessNumber :idVal="articleInfo.path" :numStyle="numStyle"></AccessNumber> -->
@@ -31,10 +31,12 @@ import AccessCount from "./Valine/AccessCount";
 export default {
   components: { AccessCount },
   name: "ArticleInfo",
-  props: ["articleInfo", "currentTag"],
-  mounted() {
-
+  props: {
+    articleInfo: { type: Object, default: {} },
+    currentTag: { type: String, default: "" },
+    isList: { type: Boolean, default: false } //是否
   },
+  mounted() {},
   data() {
     return {
       numStyle: {

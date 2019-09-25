@@ -14,7 +14,7 @@
       <i class="zpicon-date iconfont" />-->
       <div class="abstract-info" v-html="item.excerpt" v-if="item.excerpt"></div>
       <hr />
-      <ArticleInfo :articleInfo="item" :currentTag="currentTag"></ArticleInfo>
+      <ArticleInfo :articleInfo="item" :currentTag="currentTag"  :isList="true"></ArticleInfo>
     </div>
   </div>
 </template>
