@@ -81,7 +81,7 @@ export default {
       console.log(this.list);
     },
     tagColor: function() {
-      const colorArr = ["#b94e2b", "#a89090", "#03a9f4", "#33bf5e", "#e2be54"];
+      const colorArr = ["#E6A23C", "#F56C6C", "#909399", "#67C23A", "#409EFF"];
       const tagColorIndex = Math.floor(Math.random() * colorArr.length);
       return colorArr[tagColorIndex];
     },

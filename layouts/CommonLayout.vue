@@ -69,7 +69,12 @@ export default {
 
   computed: {
     isShowComment() {
-      return this.$page.frontmatter.comments;
+      return (
+        !this.$page.frontmatter.home &&
+        (this.$page.frontmatter.comments !== undefined
+          ? this.$page.frontmatter.comments
+          : true)
+      );
     },
     shouldShowNavbar() {
       const { themeConfig } = this.$site;
@@ -118,7 +123,6 @@ export default {
   },
 
   mounted() {
-    console.log(this);
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });

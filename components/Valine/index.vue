@@ -1,5 +1,5 @@
 <template>
-  <div class="vcomment" v-if="data.comments === true">
+  <div class="vcomment" v-if="data.comments !== false">
     <div id="vcomments"></div>
   </div>
 </template>

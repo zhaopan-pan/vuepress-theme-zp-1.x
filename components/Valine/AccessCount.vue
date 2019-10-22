@@ -17,7 +17,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.getPath(this.path));
   },
   methods: {
     getPath(path) {

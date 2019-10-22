@@ -48,7 +48,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.articleInfo);
   },
   methods: {
     goTags(tag) {
