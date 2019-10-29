@@ -4,10 +4,11 @@
     <div class="theme-default-content">
       <h1 class="article-title" v-if="isAticle">{{page.title||page.frontmatter.title||"-"}}</h1>
       <ArticleInfo :articleInfo="page" :currentTag="page.tag" v-if="isAticle" class="custom"></ArticleInfo>
-      <hr  v-if="isAticle"/>
+      <hr v-if="isAticle" />
       <Content />
     </div>
     <TimeLine v-if="isTimeLine"></TimeLine>
+    <Category v-if="isCategory"></Category>
 
     <footer class="page-edit" v-if="!isTimeLine">
       <div class="edit-link" v-if="editLink">
@@ -41,17 +42,21 @@
 <script>
 import { resolvePage, outboundRE, endingSlashRE } from "../util";
 import TimeLine from "@theme/components/TimeLine";
+import Category from "@theme/components/Category";
 import ArticleInfo from "./ArticleInfo";
 
 export default {
   props: ["sidebarItems"],
-  components: { TimeLine, ArticleInfo },
+  components: { TimeLine, ArticleInfo, Category },
   computed: {
     lastUpdated() {
       return this.$page.lastUpdated;
     },
     isTimeLine() {
       return this.$page.frontmatter.isTimeLine;
+    },
+    isCategory() {
+      return this.$page.frontmatter.isCategory;
     },
     isAticle() {
       return (

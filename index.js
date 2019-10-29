@@ -23,17 +23,6 @@ module.exports = (options, ctx) => ({
       '@vuepress/blog',
       {
         directories: [
-          // {
-          //   id: 'Tags',
-          //   dirname: 'Tags',
-          //   path: '/',
-          //   // layout: 'IndexPost', defaults to `Layout.vue`
-          //   itemLayout: 'Tags',
-          //   itemPermalink: '/:year/:month/:day/:slug',
-          //   pagination: {
-          //     lengthPerPage: 5,
-          //   },
-          // },
         ],
         frontmatters: [
           {
@@ -41,7 +30,7 @@ module.exports = (options, ctx) => ({
             keys: ['tag'],//注册到元数据中的key
             path: '/tag/',
             layout: 'Tags',  //defaults to `FrontmatterKey.vue`
-            frontmatter: { title: 'Tag', sidebar: true },//注册页面的自定义元数据
+            frontmatter: { title: 'Tag', sidebar: true, isTag: true },//注册页面的自定义元数据
             pagination: {
               lengthPerPage: 5
             }

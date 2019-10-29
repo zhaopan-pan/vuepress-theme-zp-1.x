@@ -52,7 +52,7 @@ export default {
   methods: {
     goTags(tag) {
       console.log(tag);
-      window.location.href = `/zpblog/tag/?tag=${tag}`;
+      window.location.href = `/tag/?tag=${tag}`;
     }
   }
 };

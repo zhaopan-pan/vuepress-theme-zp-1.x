@@ -71,6 +71,9 @@ export default {
     isShowComment() {
       return (
         !this.$page.frontmatter.home &&
+        !this.$page.frontmatter.isTag &&
+        !this.$page.frontmatter.isTimeLine &&
+        !this.$page.frontmatter.isCategory &&
         (this.$page.frontmatter.comments !== undefined
           ? this.$page.frontmatter.comments
           : true)

@@ -47,12 +47,9 @@ export default {
       let needDealData = allPageData.filter(
         item => item.frontmatter.home != true && item.frontmatter.date
       );
-      console.log(needDealData);
       this.timeLineData = this.addYearNode(dateSortByTime(needDealData));
-      console.log(this.timeLineData);
     },
     addYearNode: function(data) {
-      console.log(data);
       let sortDataByYearArr = [];
       let previousDate = 0;
       data.map((item, index) => {
@@ -86,7 +83,6 @@ export default {
           // item.frontmatter.date = monthDay;
         }
       });
-      console.log(sortDataByYearArr);
       return sortDataByYearArr;
     }
   }
