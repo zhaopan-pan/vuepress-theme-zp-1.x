@@ -39,6 +39,8 @@ export default {
       return this.link === '/'
     }
   },
+  mounted() {
+  },
 
   methods: {
     isExternal,

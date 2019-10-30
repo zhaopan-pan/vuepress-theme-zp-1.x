@@ -10,25 +10,10 @@
 
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
-    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
+    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar" v-if="sidebarShow">
       <slot name="sidebar-top" slot="top" />
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
-
-    <!-- <Home v-if="$page.frontmatter.home"/>
-    <Page
-      v-else
-      :sidebar-items="sidebarItems"
-    >
-      <slot
-        name="page-top"
-        slot="top"
-      />
-      <slot
-        name="page-bottom"
-        slot="bottom"
-      />
-    </Page>-->
     <slot />
     <Valine v-if="isShowComment" />
     <BackToTop />
@@ -36,9 +21,7 @@
 </template>
 
 <script>
-import Home from "@theme/components/Home.vue";
 import Navbar from "@theme/components/Navbar.vue";
-import Page from "@theme/components/Page.vue";
 import Sidebar from "@theme/components/Sidebar.vue";
 import BackToTop from "@theme/components/BackToTop.vue";
 import Valine from "@theme/components/Valine";
@@ -46,8 +29,6 @@ import { resolveSidebarItems } from "../util";
 
 export default {
   components: {
-    Home,
-    Page,
     Sidebar,
     Navbar,
     BackToTop,
@@ -63,20 +44,21 @@ export default {
   props: {
     sidebarShow: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
 
   computed: {
     isShowComment() {
       return (
-        !this.$page.frontmatter.home &&
-        !this.$page.frontmatter.isTag &&
-        !this.$page.frontmatter.isTimeLine &&
-        !this.$page.frontmatter.isCategory &&
-        (this.$page.frontmatter.comments !== undefined
-          ? this.$page.frontmatter.comments
-          : true)
+        (!this.$page.frontmatter.home &&
+          !this.$page.frontmatter.isTag &&
+          !this.$page.frontmatter.isTimeLine &&
+          !this.$page.path.includes("category") &&
+          (this.$page.frontmatter.comments !== undefined
+            ? this.$page.frontmatter.comments
+            : true)) ||
+        false
       );
     },
     shouldShowNavbar() {
@@ -126,6 +108,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.isShowComment);
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });
@@ -133,7 +116,6 @@ export default {
 
   methods: {
     toggleSidebar(to) {
-      console.log(to);
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
     },
 

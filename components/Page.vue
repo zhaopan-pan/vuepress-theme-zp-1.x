@@ -5,11 +5,9 @@
       <h1 class="article-title" v-if="isAticle">{{page.title||page.frontmatter.title||"-"}}</h1>
       <ArticleInfo :articleInfo="page" :currentTag="page.tag" v-if="isAticle" class="custom"></ArticleInfo>
       <hr v-if="isAticle" />
-      <Content />
+      <Content v-if="!isCategory" />
     </div>
     <TimeLine v-if="isTimeLine"></TimeLine>
-    <Category v-if="isCategory"></Category>
-
     <footer class="page-edit" v-if="!isTimeLine">
       <div class="edit-link" v-if="editLink">
         <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
@@ -42,12 +40,11 @@
 <script>
 import { resolvePage, outboundRE, endingSlashRE } from "../util";
 import TimeLine from "@theme/components/TimeLine";
-import Category from "@theme/components/Category";
 import ArticleInfo from "./ArticleInfo";
 
 export default {
   props: ["sidebarItems"],
-  components: { TimeLine, ArticleInfo, Category },
+  components: { TimeLine, ArticleInfo },
   computed: {
     lastUpdated() {
       return this.$page.lastUpdated;
@@ -56,7 +53,7 @@ export default {
       return this.$page.frontmatter.isTimeLine;
     },
     isCategory() {
-      return this.$page.frontmatter.isCategory;
+      return this.$page.path.includes("category");
     },
     isAticle() {
       return (
@@ -133,7 +130,6 @@ export default {
   },
   mounted() {
     console.log(this.$page);
-    console.log(this.isAticle);
   },
   methods: {
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {

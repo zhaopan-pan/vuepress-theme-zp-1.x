@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <Content class="custom" />
+    <Content class="custom" custom/>
 
     <div class="footer" v-if="data.footer">{{ data.footer }}</div>
   </main>

@@ -33,7 +33,17 @@ module.exports = (options, ctx) => ({
             frontmatter: { title: 'Tag', sidebar: true, isTag: true },//注册页面的自定义元数据
             pagination: {
               lengthPerPage: 5
-            }
+            },
+            scopeLayout: 'Tag'
+
+          },
+          {
+            id: "category",
+            keys: ['category'],//注册到元数据中的key
+            path: '/category/',
+            layout: 'Category',  //defaults to `FrontmatterKey.vue`
+            // frontmatter: { title: 'Category', sidebar: true, isCategory: true },//注册页面的自定义元数据
+            scopeLayout: 'Category'
           },
         ]
       },
