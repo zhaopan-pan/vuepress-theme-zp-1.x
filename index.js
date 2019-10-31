@@ -19,11 +19,12 @@ module.exports = (options, ctx) => ({
   layoutDir: 'layouts',
   plugins: [
     ['@vuepress/active-header-links', options.activeHeaderLinks],
+    '@vuepress/search',
+    '@vuepress/plugin-nprogress',
     [
-      '@vuepress/blog',
+      '@vuepress/plugin-blog',
       {
-        directories: [
-        ],
+        permalink: '/:regular',
         frontmatters: [
           {
             id: "tags",
@@ -35,21 +36,25 @@ module.exports = (options, ctx) => ({
               lengthPerPage: 5
             },
             scopeLayout: 'Tag'
-
           },
+          // {
+          //   id: "category",
+          //   keys: ['category'],//注册到元数据中的key
+          //   path: '/category/',
+          //   layout: 'Category',  //defaults to `FrontmatterKey.vue`
+          //   // frontmatter: { title: 'Category', sidebar: true, isCategory: true },//注册页面的自定义元数据
+          //   scopeLayout: 'Category'
+          // },
           {
-            id: "category",
-            keys: ['category'],//注册到元数据中的key
-            path: '/category/',
-            layout: 'Category',  //defaults to `FrontmatterKey.vue`
-            // frontmatter: { title: 'Category', sidebar: true, isCategory: true },//注册页面的自定义元数据
+            id: 'categories',
+            keys: ['category'],
+            path: '/categories/',
+            layout: 'Categories',
             scopeLayout: 'Category'
           },
         ]
       },
     ],
-    '@vuepress/search',
-    '@vuepress/plugin-nprogress',
     ['container', {
       type: 'tip',
       defaultTitle: {

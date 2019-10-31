@@ -78,7 +78,7 @@ export default {
         Object.hasOwnProperty.call(blogConfig, "category")
       ) {
         const category = blogConfig.category;
-        const $category = this.$category;
+        const $category = this.$categories;
         userNav.splice(parseInt(category.location || 2) - 1, 0, {
           items: $category.list.map(item => {
             item.link = item.path;
@@ -89,13 +89,12 @@ export default {
           type: "links"
           // icon: "reco-category"
         });
-        console.log("进来了,2", $category.list);
+        console.log("$category", $category);
       }
       return this.userNav;
     },
 
     userLinks() {
-      console.log(this.nav);
       return (this.nav || []).map(link => {
         console.log(link);
         return Object.assign(resolveNavLinkItem(link), {
@@ -130,7 +129,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$page);
+    console.log(this);
   }
 };
 </script>

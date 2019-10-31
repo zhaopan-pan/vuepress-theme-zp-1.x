@@ -5,7 +5,7 @@
       <h1 class="article-title" v-if="isAticle">{{page.title||page.frontmatter.title||"-"}}</h1>
       <ArticleInfo :articleInfo="page" :currentTag="page.tag" v-if="isAticle" class="custom"></ArticleInfo>
       <hr v-if="isAticle" />
-      <Content v-if="!isCategory" />
+      <Content />
     </div>
     <TimeLine v-if="isTimeLine"></TimeLine>
     <footer class="page-edit" v-if="!isTimeLine">

@@ -54,7 +54,7 @@ export default {
         (!this.$page.frontmatter.home &&
           !this.$page.frontmatter.isTag &&
           !this.$page.frontmatter.isTimeLine &&
-          !this.$page.path.includes("category") &&
+          !this.$page.path.includes("categories") &&
           (this.$page.frontmatter.comments !== undefined
             ? this.$page.frontmatter.comments
             : true)) ||
