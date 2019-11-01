@@ -5,7 +5,7 @@
 </template>
 
 <script>
-// import CommonLayout from "./CommonLayout";
+// import CommonLayout from "@theme/components/CommonLayout";
 
 export default {
   name: "Category",

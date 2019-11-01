@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import CommonLayout from "./CommonLayout";
+import CommonLayout from "@theme/components/CommonLayout";
 import Home from "@theme/components/Home.vue";
 import ArticleCard from "@theme/components/ArticleCard.vue";
 import Pagation from "../components/Pagation.vue";

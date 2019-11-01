@@ -53,7 +53,7 @@ export default {
       return this.$page.frontmatter.isTimeLine;
     },
     isCategory() {
-      return this.$page.path.includes("category");
+      return this.$page.path.includes("categories");
     },
     isAticle() {
       return (
