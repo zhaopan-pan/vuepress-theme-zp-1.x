@@ -1,21 +1,21 @@
 <template>
-  <!-- <CommonLayout :sidebarShow="false"> -->
-  <div class="aaaaaass">category</div>
-  <!-- </CommonLayout> -->
+  <CommonLayout :sidebarShow="false">
+    <div class="aaaaaass">category</div>
+  </CommonLayout>
 </template>
 
 <script>
-// import CommonLayout from "@theme/components/CommonLayout";
+import CommonLayout from "@theme/components/CommonLayout";
 
 export default {
   name: "Category",
-  // components: { CommonLayout },
+  components: { CommonLayout },
   props: {},
   data() {
     return {};
   },
   mounted() {
-    console.log(this.$route.query);
+    console.log(this.$page.path);
   },
   methods: {}
 };

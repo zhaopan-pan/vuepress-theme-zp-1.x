@@ -37,14 +37,6 @@ module.exports = (options, ctx) => ({
             },
             scopeLayout: 'Tag'
           },
-          // {
-          //   id: "category",
-          //   keys: ['category'],//注册到元数据中的key
-          //   path: '/category/',
-          //   layout: 'Category',  //defaults to `FrontmatterKey.vue`
-          //   // frontmatter: { title: 'Category', sidebar: true, isCategory: true },//注册页面的自定义元数据
-          //   scopeLayout: 'Category'
-          // },
           {
             id: 'categories',
             keys: ['category'],
