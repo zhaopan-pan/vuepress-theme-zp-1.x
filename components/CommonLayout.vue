@@ -10,7 +10,7 @@
 
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
-    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar" v-if="sidebarShow">
+    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
       <slot name="sidebar-top" slot="top" />
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
@@ -116,6 +116,7 @@ export default {
 
   methods: {
     toggleSidebar(to) {
+      console.log(to);
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
     },
 
