@@ -14,8 +14,9 @@
       <i class="zpicon-date iconfont" />-->
       <div class="abstract-info" v-html="item.excerpt" v-if="item.excerpt"></div>
       <hr />
-      <ArticleInfo :articleInfo="item" :currentTag="currentTag"  :isList="true"></ArticleInfo>
+      <ArticleInfo :articleInfo="item" :currentTag="currentTag" :isList="true"></ArticleInfo>
     </div>
+    <slot/>
   </div>
 </template>
 
@@ -44,6 +45,9 @@ export default {
   },
   mounted() {
     console.log(this.data);
+  },
+  methods: {
+
   }
 };
 </script>

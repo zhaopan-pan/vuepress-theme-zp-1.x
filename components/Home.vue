@@ -18,7 +18,9 @@
 
     <div class="home-blog">
       <!-- 博客列表 -->
-      <ArticleCard class="blog-list" :data="posts" :currentPage="1"></ArticleCard>
+      <ArticleCard class="blog-list" :data="posts" :currentPage="currentPage">
+        <pagation :data="posts" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation>
+      </ArticleCard>
       <div class="blog-review">
         <img class="personal-img" :src="$withBase($themeConfig.logo)" alt="hero" />
         <h3
@@ -27,16 +29,17 @@
         >{{ $themeConfig.author || $site.title }}</h3>
         <div class="num">
           <div>
-            <i class="zpicon-up iconfont" />
+            <!-- <i class="zpicon-up iconfont" />
             <i class="zpicon-Stone-airplane iconfont" />
-            <i class="zpicon-date iconfont" />
+            <i class="zpicon-date iconfont" />-->
+            {{posts.length}}
           </div>
           <div>{{$tags.length}}</div>
         </div>
       </div>
     </div>
 
-    <Content class="custom" custom/>
+    <Content class="custom" custom />
 
     <div class="footer" v-if="data.footer">{{ data.footer }}</div>
   </main>
@@ -45,13 +48,16 @@
 <script>
 import NavLink from "@theme/components/NavLink.vue";
 import ArticleCard from "@theme/components/ArticleCard.vue";
+import Pagation from "../components/Pagation.vue";
+
 import { posix } from "path";
 
 export default {
-  components: { NavLink, ArticleCard },
+  components: { NavLink, ArticleCard, Pagation },
   data() {
     return {
-      pageShow: false
+      pageShow: false,
+      currentPage: 1
     };
   },
   computed: {
@@ -97,6 +103,13 @@ export default {
     // 获取时间的数字类型
     _getTimeNum(date) {
       return parseInt(new Date(date.frontmatter.date).getTime());
+    },
+    getCurrentPage(page) {
+      this.currentPage = Number(page);
+      this.$page.currentPage = page;
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
     }
   }
 };

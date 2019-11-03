@@ -41,7 +41,7 @@ module.exports = (options, ctx) => ({
             id: 'categories',
             keys: ['category'],
             path: '/categories/',
-            layout: 'Categories',
+            // layout: 'Categories',
             scopeLayout: 'Category'
           },
         ]

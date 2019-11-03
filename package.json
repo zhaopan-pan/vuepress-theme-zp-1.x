@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-zp",
-  "version": "0.0.2",
+  "version": "0.0.31",
   "description": "vuepress'theme",
   "main": "index.js",
   "publishConfig": {

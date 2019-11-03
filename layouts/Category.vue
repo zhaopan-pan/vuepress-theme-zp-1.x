@@ -1,6 +1,6 @@
 <template>
   <CommonLayout :sidebarShow="false">
-    <div class="aaaaaass">category</div>
+    <div class="aaaaaass">{{getPath}}</div>
   </CommonLayout>
 </template>
 
@@ -14,8 +14,13 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    getPath() {
+      console.log(this.$page.path);
+    }
+  },
   mounted() {
-    console.log(this.$page.path);
+    console.log(this.getPath);
   },
   methods: {}
 };
