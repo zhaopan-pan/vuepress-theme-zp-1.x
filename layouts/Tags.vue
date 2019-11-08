@@ -1,6 +1,6 @@
 <template>
   <CommonLayout>
-    <div class="home">
+    <div class="util-container">
       <div class="tags">
         <span
           class="single-tag"
@@ -32,14 +32,13 @@
 
 <script>
 import CommonLayout from "@theme/components/CommonLayout";
-import Home from "@theme/components/Home.vue";
 import ArticleCard from "@theme/components/ArticleCard.vue";
 import Pagation from "../components/Pagation.vue";
 
 import { getTimeToSecond, dateSortByTime } from "../util";
 
 export default {
-  components: { Home, CommonLayout, ArticleCard, Pagation },
+  components: { CommonLayout, ArticleCard, Pagation },
 
   data() {
     return {
@@ -112,7 +111,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .tags {
-  margin: 30px auto;
+  margin: 3rem auto;
 
   .single-tag {
     padding: 5px 10px;

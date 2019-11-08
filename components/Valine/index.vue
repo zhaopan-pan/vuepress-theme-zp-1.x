@@ -1,5 +1,5 @@
 <template>
-  <div class="vcomment" v-if="data.comments !== false">
+  <div class="vcomment" v-if="data.comments !== false" :class="{'hasSidebarAndPc':hasSidebar}">
     <div id="vcomments"></div>
   </div>
 </template>
@@ -8,13 +8,19 @@
 import { isActive, hashRE, groupHeaders } from "../../util";
 export default {
   name: "Valine",
+  props: {
+    hasSidebar: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     data() {
       return this.$page.frontmatter;
     }
   },
   mounted() {
-    console.log("来了！！！！");
+    console.log(this.hasSidebar);
     this.createValine();
   },
 
@@ -59,6 +65,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@media (max-width: $MQMobile) {
+  .hasSidebarAndPc {
+    margin-left: 0rem !important;
+  }
+}
+
+.hasSidebarAndPc {
+  margin-left: 20rem;
+}
+
 #vcomments {
   max-width: 740px;
   padding: 10px;

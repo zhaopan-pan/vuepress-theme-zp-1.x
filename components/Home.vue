@@ -1,5 +1,9 @@
 <template>
-  <main class="home" aria-labelledby="main-title" :class="pageShow?'zp-show': 'zp-hide'">
+  <main
+    class="util-container home"
+    aria-labelledby="main-title"
+    :class="pageShow?'zp-show': 'zp-hide'"
+  >
     <!-- 官方home -->
     <!-- <header class="hero"> -->
     <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" :alt="data.heroAlt || 'hero'" /> -->
@@ -119,11 +123,6 @@ export default {
 @require '../styles/loadMixin.styl';
 
 .home {
-  padding: $navbarHeight 2rem 0;
-  margin: 0px auto;
-  display: block;
-  max-width: 960px;
-
   .home-blog {
     display: flex;
     align-items: flex-start;

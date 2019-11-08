@@ -60,19 +60,15 @@ export default {
         return [...this.userNav, languageDropdown];
       }
 
-      // blogConfig 的处理，根绝配置自动添加分类和标签
+      // blogConfig 的处理，根绝配置自动添加分类
       const blogConfig = this.$themeConfig.blogConfig || {};
-      console.log("userNav", userNav);
-      console.log("blogConfig", blogConfig);
       const isHasCategory = userNav.some(item => {
         if (blogConfig.category) {
-          console.log("分类", item.text === blogConfig.category.text);
           return item.text === (blogConfig.category.text || "分类");
         } else {
           return true;
         }
       });
-      console.log("isHasCategory", isHasCategory);
       if (
         !isHasCategory &&
         Object.hasOwnProperty.call(blogConfig, "category")
@@ -87,16 +83,14 @@ export default {
           }),
           text: category.text || "分类",
           type: "links"
-          // icon: "reco-category"
+          // icon: "zp-category"
         });
-        console.log("$category", $category);
       }
       return this.userNav;
     },
 
     userLinks() {
       return (this.nav || []).map(link => {
-        console.log(link);
         return Object.assign(resolveNavLinkItem(link), {
           items: (link.items || []).map(resolveNavLinkItem)
         });
@@ -129,7 +123,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this);
   }
 };
 </script>

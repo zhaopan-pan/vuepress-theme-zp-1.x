@@ -15,7 +15,7 @@
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
     <slot />
-    <Valine v-if="isShowComment" />
+    <Valine v-if="isShowComment" :hasSidebar="shouldShowSidebar" />
     <BackToTop />
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
   props: {
     sidebarShow: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
 
@@ -81,7 +81,8 @@ export default {
       return (
         !frontmatter.home &&
         frontmatter.sidebar !== false &&
-        this.sidebarItems.length
+        this.sidebarItems.length &&
+        this.sidebarShow
       );
     },
 
@@ -108,7 +109,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.isShowComment);
+    console.log(this.shouldShowSidebar);
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });
