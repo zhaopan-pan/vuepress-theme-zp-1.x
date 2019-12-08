@@ -1,6 +1,6 @@
 <template>
   <CommonLayout>
-    <div class="util-container">
+    <div class="util-container" v-if="posts.length>0">
       <div class="tags">
         <span
           class="single-tag"
@@ -11,7 +11,7 @@
           @click="clickTag(item.name)"
         >{{item.name||""}}</span>
       </div>
-      <!-- :currentTag="currentTag" -->
+      <!-- 嵌套组件不能for循环渲染created中组装的数据 单条可以 -->
       <ArticleCard
         class="blog-list"
         :data="posts"
@@ -34,12 +34,10 @@
 import CommonLayout from "@theme/components/CommonLayout";
 import ArticleCard from "@theme/components/ArticleCard.vue";
 import Pagation from "../components/Pagation.vue";
-
-import { getTimeToSecond, dateSortByTime } from "../util";
-
+import mixin from "@theme/mixins/index.js";
 export default {
+  mixins: [mixin],
   components: { CommonLayout, ArticleCard, Pagation },
-
   data() {
     return {
       tagsList: [],
@@ -51,6 +49,25 @@ export default {
     };
   },
   created() {
+    // const tags = this.$tags;
+    // const currentTag = this.$route.query.tag
+    //   ? this.$route.query.tag
+    //   : this.$tags.list[0].name;
+    // if (tags && tags.list) {
+    //   console.log(tags.list);
+    //   const tagArr = tags.list;
+    //   tagArr.map(item => {
+    //     item.color = this.tagColor();
+    //     return item;
+    //   });
+    //   this.tagsList = tagArr || [];
+    //   this.getArticleListByTag(currentTag);
+    // }
+  },
+  computed: {},
+
+  mounted() {
+    console.log(this.$route.query);
     const tags = this.$tags;
     const currentTag = this.$route.query.tag
       ? this.$route.query.tag
@@ -66,11 +83,6 @@ export default {
       this.tagsList = tagArr || [];
       this.getArticleListByTag(currentTag);
     }
-  },
-  computed: {},
-
-  mounted() {
-    console.log(this.$route.query);
   },
 
   methods: {
@@ -89,7 +101,8 @@ export default {
       console.log(currentTag);
       this.currentSelectTag = currentTag;
       let posts = this.$tags.map[currentTag].pages;
-      this.posts = dateSortByTime(posts);
+      this.posts = this._dateSortByTime(posts);
+      // this.posts = dateSortByTime(posts);
       // posts.length > 0
       //   ? posts.sort((a, b) => {
       //       return getTimeToSecond(b) - getTimeToSecond(a);

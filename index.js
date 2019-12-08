@@ -32,9 +32,6 @@ module.exports = (options, ctx) => ({
             path: '/tag/',
             layout: 'Tags',  //defaults to `FrontmatterKey.vue`
             frontmatter: { title: 'Tag', sidebar: true, isTag: true },//注册页面的自定义元数据
-            pagination: {
-              lengthPerPage: 5
-            },
             scopeLayout: 'Tag'
           },
           {

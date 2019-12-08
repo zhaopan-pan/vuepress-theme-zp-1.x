@@ -1,7 +1,8 @@
 <template>
   <CommonLayout>
     <div :class="pageShow?'zp-show': 'zp-hide'" class="noscroll">
-      <Home v-if="$page.frontmatter.home" />
+      <component v-if="$page.frontmatter.home" :is="isHome"></component>
+      <!-- <Home v-if="$page.frontmatter.home" /> -->
       <Page v-else :sidebar-items="sidebarItems">
         <slot name="page-top" slot="top" />
         <slot name="page-bottom" slot="bottom" />
@@ -13,11 +14,12 @@
 <script>
 import CommonLayout from "@theme/components/CommonLayout";
 import Home from "@theme/components/Home.vue";
+import HomeBlog from "@theme/components/HomeBlog.vue";
 import Page from "@theme/components/Page.vue";
 import { resolveSidebarItems } from "../util";
 
 export default {
-  components: { Home, Page, CommonLayout },
+  components: { Home, HomeBlog, Page, CommonLayout },
   data() {
     return {
       pageShow: false
@@ -31,6 +33,13 @@ export default {
         this.$site,
         this.$localePath
       );
+    },
+    isHome() {
+      const { type } = this.$themeConfig;
+      if (type !== undefined) {
+        return type == "blog" ? "HomeBlog" : type;
+      }
+      return "Home";
     }
   },
 
@@ -54,6 +63,4 @@ export default {
 .zp-hide {
   load-start();
 }
-
-
 </style>
