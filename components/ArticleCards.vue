@@ -1,15 +1,15 @@
 <template>
-  <div class="abstract-wrapper">
+  <div class="abstract-wrapper" v-if="data.length>0">
     <div
-      v-for="(item, index) in dataList"
+      v-for="(item, index) in data"
       :key="item.path"
-      v-show="index >= (currentPageNum * pageSize - pageSize) && index < currentPageNum * pageSize"
+      v-show="index >= (currentPage * pageSize - pageSize) && index < currentPage * pageSize"
       class="abstract-item"
     >
       <div class="title">
         <router-link :to="item.path">{{item.title}}</router-link>
       </div>
-      <!-- <i class="zpicon-up iconfont" />  v-show="index >= (currentPage * pageSize - pageSize) && index < currentPage * pageSize"
+      <!-- <i class="zpicon-up iconfont" />
       <i class="zpicon-Stone-airplane iconfont" />
       <i class="zpicon-date iconfont" />-->
       <div class="abstract-info" v-html="item.excerpt"></div>
@@ -17,27 +17,18 @@
       <ArticleInfo :articleInfo="item" :currentTag="currentTag" :isList="true"></ArticleInfo>
     </div>
     <slot />
-    <pagation
-      :showPagation="showPagation"
-      :total="dataList.length"
-      :currentPage="currentPageNum"
-      :pageSize="pageSize"
-      @getCurrentPage="getCurrentPage"
-    ></pagation>
   </div>
 </template>
 
 <script>
-import ArticleInfo from "@theme/components/ArticleInfo";
-import Pagation from "../components/Pagation.vue";
+import ArticleInfo from "./ArticleInfo";
 
 export default {
-  name: "ArticleCard", //ArticleCard
-  components: { ArticleInfo, Pagation },
+  components: { ArticleInfo },
   props: {
-    dataList: {
+    data: {
       type: Array,
-      default: () => []
+      default: []
     },
     currentTag: {
       type: String,
@@ -50,27 +41,10 @@ export default {
     currentPage: {
       type: Number,
       default: 1
-    },
-    showPagation: {
-      type: Boolean,
-      default: true
     }
   },
-  data() {
-    return { currentPageNum: 1 };
-  },
-  mounted() {
-    console.log(this.dataList);
-  },
-  methods: {
-    getCurrentPage(page) {
-      console.log(this.$page);
-      console.log(page);
-      this.currentPageNum = Number(page);
-      // this.currentPage = Number(page);
-      this.$page.currentPage = page;
-    }
-  }
+  mounted() {},
+  methods: {}
 };
 </script>
 

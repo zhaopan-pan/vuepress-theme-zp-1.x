@@ -1,6 +1,6 @@
 <template>
   <CommonLayout>
-    <div class="util-container" v-if="posts.length>0">
+    <div class="util-container">
       <div class="tags">
         <span
           class="single-tag"
@@ -11,33 +11,31 @@
           @click="clickTag(item.name)"
         >{{item.name||""}}</span>
       </div>
-      <!-- 嵌套组件不能for循环渲染created中组装的数据 单条可以 -->
+      <!-- created中组装的数据在嵌套组件不能for循环渲染 单条可以 ？？？-->
       <ArticleCard
         class="blog-list"
-        :data="posts"
+        :dataList="posts"
         :currentPage="currentPage"
-        @currentTag="getCurrentTag"
-        :pageSize="pageSize"
-      ></ArticleCard>
-
-      <pagation
-        :data="posts"
-        :currentPage="currentPage"
-        @getCurrentPage="getCurrentPage"
-        :pageSize="pageSize"
-      ></pagation>
+        :currentTag="currentSelectTag"
+      />
+      <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
     </div>
   </CommonLayout>
 </template>
 
 <script>
 import CommonLayout from "@theme/components/CommonLayout";
-import ArticleCard from "@theme/components/ArticleCard.vue";
-import Pagation from "../components/Pagation.vue";
+import ArticleCard from "@theme/components/ArticleCard";
+// import Pagation from "@theme/components/Pagation.vue";
 import mixin from "@theme/mixins/index.js";
+
 export default {
   mixins: [mixin],
-  components: { CommonLayout, ArticleCard, Pagation },
+  components: {
+    CommonLayout,
+    ArticleCard
+    // Pagation
+  },
   data() {
     return {
       tagsList: [],
@@ -49,30 +47,10 @@ export default {
     };
   },
   created() {
-    // const tags = this.$tags;
-    // const currentTag = this.$route.query.tag
-    //   ? this.$route.query.tag
-    //   : this.$tags.list[0].name;
-    // if (tags && tags.list) {
-    //   console.log(tags.list);
-    //   const tagArr = tags.list;
-    //   tagArr.map(item => {
-    //     item.color = this.tagColor();
-    //     return item;
-    //   });
-    //   this.tagsList = tagArr || [];
-    //   this.getArticleListByTag(currentTag);
-    // }
-  },
-  computed: {},
-
-  mounted() {
-    console.log(this.$route.query);
     const tags = this.$tags;
     const currentTag = this.$route.query.tag
       ? this.$route.query.tag
       : this.$tags.list[0].name;
-
     if (tags && tags.list) {
       console.log(tags.list);
       const tagArr = tags.list;
@@ -83,6 +61,26 @@ export default {
       this.tagsList = tagArr || [];
       this.getArticleListByTag(currentTag);
     }
+  },
+  computed: {},
+
+  mounted() {
+    console.log(this.$route.query);
+    // const tags = this.$tags;
+    // const currentTag = this.$route.query.tag
+    //   ? this.$route.query.tag
+    //   : this.$tags.list[0].name;
+
+    // if (tags && tags.list) {
+    //   console.log(tags.list);
+    //   const tagArr = tags.list;
+    //   tagArr.map(item => {
+    //     item.color = this.tagColor();
+    //     return item;
+    //   });
+    //   this.tagsList = tagArr || [];
+    //   this.getArticleListByTag(currentTag);
+    // }
   },
 
   methods: {
@@ -101,7 +99,9 @@ export default {
       console.log(currentTag);
       this.currentSelectTag = currentTag;
       let posts = this.$tags.map[currentTag].pages;
-      this.posts = this._dateSortByTime(posts);
+      setTimeout(() => {
+        this.posts = this._dateSortByTime(posts);
+      }, 100);
       // this.posts = dateSortByTime(posts);
       // posts.length > 0
       //   ? posts.sort((a, b) => {

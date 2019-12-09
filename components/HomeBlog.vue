@@ -6,8 +6,8 @@
   >
     <div class="home-blog">
       <!-- 博客列表 -->
-      <ArticleCard class="blog-list" :data="posts" :currentPage="currentPage">
-        <pagation :data="posts" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation>
+      <ArticleCard class="blog-list" :dataList="posts" :currentPage="currentPage">
+        <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
       </ArticleCard>
       <div class="blog-review">
         <img class="personal-img" :src="$withBase($themeConfig.logo)" alt="hero" />
@@ -31,10 +31,13 @@
 
 <script>
 import ArticleCard from "@theme/components/ArticleCard.vue";
-import Pagation from "../components/Pagation.vue";
+// import Pagation from "../components/Pagation.vue";
 export default {
   name: "HomeBlog",
-  components: { ArticleCard, Pagation },
+  components: {
+    ArticleCard,
+    // Pagation
+  },
   data() {
     return {
       pageShow: false,

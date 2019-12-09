@@ -10,19 +10,12 @@
           :key="index"
         >{{item.name}}</router-link>
       </div>
-      <ArticleCard
-        class="blog-list"
-        :data="postsData"
-        :currentPage="currentPage"
-        @currentTag="getCurrentTag"
-        :pageSize="pageSize"
-      ></ArticleCard>
-      <pagation
-        :data="postsData"
+      <ArticleCard class="blog-list" :dataList="postsData" @currentTag="getCurrentTag"></ArticleCard>
+      <!-- <pagation
+        :total="postsData.length"
         :currentPage="currentPage"
         @getCurrentPage="getCurrentPage"
-        :pageSize="pageSize"
-      ></pagation>
+      ></pagation>-->
     </div>
   </CommonLayout>
 </template>
@@ -30,10 +23,17 @@
 <script>
 import CommonLayout from "@theme/components/CommonLayout";
 import ArticleCard from "@theme/components/ArticleCard.vue";
-import Pagation from "../components/Pagation.vue";
+// import Pagation from "../components/Pagation.vue";
+import mixin from "@theme/mixins/index.js";
+
 export default {
   name: "Category",
-  components: { CommonLayout, ArticleCard, Pagation },
+  mixins: [mixin],
+  components: {
+    CommonLayout,
+    ArticleCard
+    //  Pagation
+  },
   props: {},
   data() {
     return {
@@ -66,7 +66,9 @@ export default {
     postsData() {
       const getCategoriesMap = this.getCategories.map;
       console.log(getCategoriesMap[this.getCurrentCategoryName].pages);
-      return getCategoriesMap[this.getCurrentCategoryName].pages;
+      return this._dateSortByTime(
+        getCategoriesMap[this.getCurrentCategoryName].pages
+      );
     },
     getRouteData() {
       const routeData = [];
