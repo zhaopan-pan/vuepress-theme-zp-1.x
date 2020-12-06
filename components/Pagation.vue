@@ -146,7 +146,7 @@ export default {
 
       &.jumpinp {
         input {
-          width: 55px;
+          width: 25px;
           height: 26px;
           font-size: 13px;
           border: 1px solid #ccc;
@@ -170,7 +170,7 @@ export default {
       }
 
       &.jumppoint {
-        margin-left: 30px;
+        margin-left: 15px;
       }
     }
   }

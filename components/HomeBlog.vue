@@ -1,28 +1,38 @@
 <template>
   <main
-    class="util-container home"
+    class=""
     aria-labelledby="main-title"
-    :class="pageShow?'zp-show': 'zp-hide'"
+    :class="pageShow ? 'zp-show' : 'zp-hide'"
   >
-    <div class="home-blog">
-      <!-- 博客列表 -->
-      <ArticleCard class="blog-list" :dataList="posts" :currentPage="currentPage">
-        <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
-      </ArticleCard>
-      <div class="blog-review">
-        <img class="personal-img" :src="$withBase($themeConfig.logo)" alt="hero" />
-        <h3
-          class="name"
-          v-if="$themeConfig.author || $site.title"
-        >{{ $themeConfig.author || $site.title }}</h3>
-        <div class="num">
-          <div>
-            <!-- <i class="zpicon-up iconfont" />
+    <div>
+      <HomeBg />
+      <div class="home-blog util-container home">
+        <!-- 博客列表 -->
+        <ArticleCard
+          class="blog-list"
+          :dataList="posts"
+          :currentPage="currentPage"
+        >
+          <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
+        </ArticleCard>
+        <div class="blog-review">
+          <img
+            class="personal-img"
+            :src="$withBase($themeConfig.logo)"
+            alt="hero"
+          />
+          <h3 class="name" v-if="$themeConfig.author || $site.title">
+            {{ $themeConfig.author || $site.title }}
+          </h3>
+          <div class="num">
+            <div>
+              <!-- <i class="zpicon-up iconfont" />
             <i class="zpicon-Stone-airplane iconfont" />
             <i class="zpicon-date iconfont" />-->
-            {{posts.length}}
+              {{ posts.length }}
+            </div>
+            <div>{{ $tags.length }}</div>
           </div>
-          <div>{{$tags.length}}</div>
         </div>
       </div>
     </div>
@@ -31,17 +41,17 @@
 
 <script>
 import ArticleCard from "@theme/components/ArticleCard.vue";
-// import Pagation from "../components/Pagation.vue";
+import HomeBg from "@theme/components/HomeBg.vue";
 export default {
   name: "HomeBlog",
   components: {
     ArticleCard,
-    // Pagation
+    HomeBg,
   },
   data() {
     return {
       pageShow: false,
-      currentPage: 1
+      currentPage: 1,
     };
   },
   computed: {
@@ -51,7 +61,7 @@ export default {
     posts() {
       console.log(this.$page);
       let posts = this.$site.pages;
-      posts = posts.filter(item => {
+      posts = posts.filter((item) => {
         const { home, isTimeLine, date, tag } = item.frontmatter;
         return !(home == true || date === undefined || tag === undefined);
       });
@@ -64,9 +74,9 @@ export default {
     actionLink() {
       return {
         link: this.data.actionLink,
-        text: this.data.actionText
+        text: this.data.actionText,
       };
-    }
+    },
   },
   mounted() {
     this.pageShow = true;
@@ -94,8 +104,8 @@ export default {
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 100);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus">
@@ -104,7 +114,7 @@ export default {
 .home-blog {
   display: flex;
   align-items: flex-start;
-  margin: 20px auto 0;
+  // margin: 20px auto 0;
   max-width: 1126px;
 
   .blog-review {

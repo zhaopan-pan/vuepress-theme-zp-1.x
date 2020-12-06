@@ -272,6 +272,9 @@ export function deepCopy(arg) {
   } else if (arg instanceof Object) {
     let n = {};
     for (let i in arg) {
+      if (arg[i] === arg) {//是否循环引用
+        return false;
+      }
       n[i] = deepCopy(arg[i]);
     }
     return n;
