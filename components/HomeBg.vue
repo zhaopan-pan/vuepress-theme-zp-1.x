@@ -28,9 +28,7 @@ export default {
       return initBgImageStyle;
     },
   },
-  mounted() {
-    console.log(this.$site);
-  },
+  mounted() {},
   methods: {},
 };
 </script>
