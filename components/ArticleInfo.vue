@@ -30,7 +30,7 @@
 <script>
 import AccessCount from "./Valine/AccessCount";
 import Tags from "@theme/layouts/Tags.vue";
-
+import { goTags } from "@theme/util";
 export default {
   name: "ArticleInfo",
   components: { AccessCount, Tags },
@@ -47,14 +47,11 @@ export default {
         fontWeight: "normal",
         color: "#999",
       },
+      goTags: goTags,
     };
   },
 
-  methods: {
-    goTags(tag) {
-      window.location.href = `/tag/?tag=${tag}`;
-    },
-  },
+  methods: {},
 };
 </script>
 
