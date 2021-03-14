@@ -13,19 +13,17 @@ export default {
       fromTopNum: 0,
       toTopDom: "",
       mostTop: "",
-      interVal: null
+      interVal: null,
     };
   },
   props: {
     data: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   mounted() {
     this.$nextTick(() => {
-      console.log(window.innerHeight);
-      console.log(document.body.scrollHeight);
       this.toTopDom = this.$refs["toTop"];
       // 通过$refs获取dom元素
       // this.mostTop = this.$refs.toTop;
@@ -34,7 +32,7 @@ export default {
     });
   },
   methods: {
-    scrollToTop: function(e) {
+    scrollToTop: function (e) {
       this.backToTopFun();
     },
     handleScroll() {
@@ -52,11 +50,9 @@ export default {
         this.toTopDom.style.bottom = "-5%";
       }
     },
-    backToTopFun: function() {
+    backToTopFun: function () {
       const { fromTopNum } = this;
-      console.log(fromTopNum / 5);
       const cutFromTopNum = Math.floor(fromTopNum / 15);
-      console.log(fromTopNum, cutFromTopNum);
       let num = 0;
       this.interVal = setInterval(() => {
         let remainderNum = fromTopNum - cutFromTopNum * num;
@@ -66,12 +62,12 @@ export default {
         window.scrollTo(0, remainderNum);
         num++;
       }, 15);
-    }
+    },
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
     this.interVal ? clearInterval(this.interVal) : "";
-  }
+  },
 };
 </script>
 

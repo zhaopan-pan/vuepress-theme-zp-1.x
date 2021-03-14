@@ -1,6 +1,6 @@
 <template>
   <CommonLayout>
-    <div :class="pageShow?'zp-show': 'zp-hide'" class="noscroll">
+    <div :class="pageShow ? 'zp-show' : 'zp-hide'" class="noscroll">
       <component v-if="$page.frontmatter.home" :is="isHome"></component>
       <!-- <Home v-if="$page.frontmatter.home" /> -->
       <Page v-else :sidebar-items="sidebarItems">
@@ -22,7 +22,7 @@ export default {
   components: { Home, HomeBlog, Page, CommonLayout },
   data() {
     return {
-      pageShow: false
+      pageShow: false,
     };
   },
   computed: {
@@ -40,7 +40,7 @@ export default {
         return type == "blog" ? "HomeBlog" : type;
       }
       return "Home";
-    }
+    },
   },
 
   mounted() {
@@ -48,7 +48,7 @@ export default {
     this.pageShow = true;
   },
 
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -62,5 +62,13 @@ export default {
 
 .zp-hide {
   load-start();
+}
+
+.shadow {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+  }
 }
 </style>

@@ -1,7 +1,6 @@
 <template lang="">
     <div class="home-Bg-Box">
         <div :style="bgImageStyle"></div>
-        <h1>1111</h1>
     </div>
 </template>
 <script>

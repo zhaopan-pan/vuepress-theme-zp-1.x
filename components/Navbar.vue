@@ -14,19 +14,27 @@
         class="site-name"
         v-if="$siteTitle"
         :class="{ 'can-hide': $site.themeConfig.logo }"
-      >{{ $siteTitle }}</span>
+        >{{ $siteTitle }}</span
+      >
     </router-link>
 
     <div
       class="links"
-      :style="linksWrapMaxWidth ? {
-        'max-width': linksWrapMaxWidth + 'px'
-      } : {}"
+      :style="
+        linksWrapMaxWidth
+          ? {
+              'max-width': linksWrapMaxWidth + 'px',
+            }
+          : {}
+      "
     >
       <!-- <Theme /> -->
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox
-        v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"
+        v-else-if="
+          $site.themeConfig.search !== false &&
+          $page.frontmatter.search !== false
+        "
       />
       <NavLinks class="can-hide" />
     </div>
@@ -45,7 +53,7 @@ export default {
 
   data() {
     return {
-      linksWrapMaxWidth: null
+      linksWrapMaxWidth: null,
     };
   },
 
@@ -77,9 +85,9 @@ export default {
 
     isAlgoliaSearch() {
       return this.algolia && this.algolia.apiKey && this.algolia.indexName;
-    }
+    },
   },
-  methods: {}
+  methods: {},
 };
 
 function css(el, property) {

@@ -4,13 +4,18 @@
       <div class="categories">
         <router-link
           class="categories-item"
-          :class="{'active':getCurrentCategoryName==item.name}"
+          :class="{ active: getCurrentCategoryName == item.name }"
           :to="item.path"
           v-for="(item, index) in getRouteData"
           :key="index"
-        >{{item.name}}</router-link>
+          >{{ item.name }}</router-link
+        >
       </div>
-      <ArticleCard class="blog-list" :dataList="postsData" @currentTag="getCurrentTag"></ArticleCard>
+      <ArticleCard
+        class="blog-list"
+        :dataList="postsData"
+        @currentTag="getCurrentTag"
+      ></ArticleCard>
       <!-- <pagation
         :total="postsData.length"
         :currentPage="currentPage"
@@ -31,7 +36,7 @@ export default {
   mixins: [mixin],
   components: {
     CommonLayout,
-    ArticleCard
+    ArticleCard,
     //  Pagation
   },
   props: {},
@@ -39,7 +44,7 @@ export default {
     return {
       currentPage: Number(1), //页码
       pageSize: 3, //每页条数
-      categoryName: ""
+      categoryName: "",
     };
   },
   computed: {
@@ -72,11 +77,11 @@ export default {
     },
     getRouteData() {
       const routeData = [];
-      this.getCategories.list.map(item => {
+      this.getCategories.list.map((item) => {
         routeData.push({ path: item.path, name: item.name });
       });
       return routeData;
-    }
+    },
   },
   mounted() {},
   methods: {
@@ -88,22 +93,21 @@ export default {
       console.log(page);
       this.currentPage = Number(page);
       this.$page.currentPage = page;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="stylus" scoped>
 .categories {
   margin: 3rem auto;
-  display: flex;
-  justify-content: start;
+  flex: 1;
 
   .categories-item {
     display: inline-block;
     width: auto;
     line-height: 1.8rem;
-    margin: 0.2rem 0.7rem;
+    margin: 0.4rem 0.7rem;
     padding: 0.2rem 0.5rem;
     border: 1px solid #cfd4db;
     border-radius: 0.3rem;

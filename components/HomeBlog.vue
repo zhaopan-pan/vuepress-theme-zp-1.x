@@ -16,22 +16,27 @@
           <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
         </ArticleCard>
         <div class="blog-review">
-          <img
-            class="personal-img"
-            :src="$withBase($themeConfig.logo)"
-            alt="hero"
-          />
-          <h3 class="name" v-if="$themeConfig.author || $site.title">
-            {{ $themeConfig.author || $site.title }}
-          </h3>
-          <div class="num">
-            <div>
-              <!-- <i class="zpicon-up iconfont" />
+          <div class="user-info shadow">
+            <img
+              class="personal-img"
+              :src="$withBase($themeConfig.logo)"
+              alt="hero"
+            />
+            <h3 class="name" v-if="$themeConfig.author || $site.title">
+              {{ $themeConfig.author || $site.title }}
+            </h3>
+            <div class="num">
+              <div>
+                <!-- <i class="zpicon-up iconfont" />
             <i class="zpicon-Stone-airplane iconfont" />
             <i class="zpicon-date iconfont" />-->
-              {{ posts.length }}
+                {{ posts.length }}
+              </div>
+              <div>{{ $tags.length }}</div>
             </div>
-            <div>{{ $tags.length }}</div>
+          </div>
+          <div class="tag-box shadow">
+            <Tag :justShowTags="true" />
           </div>
         </div>
       </div>
@@ -42,11 +47,13 @@
 <script>
 import ArticleCard from "@theme/components/ArticleCard.vue";
 import HomeBg from "@theme/components/HomeBg.vue";
+import Tag from "@theme/layouts/Tags.vue";
 export default {
   name: "HomeBlog",
   components: {
     ArticleCard,
     HomeBg,
+    Tag,
   },
   data() {
     return {
@@ -59,7 +66,6 @@ export default {
       return this.$page.frontmatter;
     },
     posts() {
-      console.log(this.$page);
       let posts = this.$site.pages;
       posts = posts.filter((item) => {
         const { home, isTimeLine, date, tag } = item.frontmatter;
@@ -81,7 +87,6 @@ export default {
   mounted() {
     this.pageShow = true;
     // console.log(this);
-    console.log(this.posts);
     // let posts = this.$site.pages;
     // posts = posts.filter(item => {
     //   const { home, date } = item.frontmatter;
@@ -122,42 +127,52 @@ export default {
     margin-left: 15px;
     width: 380px;
     height: auto;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
 
-    &:hover {
-      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
-    }
+    .user-info {
+      .personal-img {
+        display: block;
+        margin: 2rem auto;
+        width: 8rem;
+        height: 8rem;
+        border-radius: 8rem;
+      }
 
-    .personal-img {
-      display: block;
-      margin: 2rem auto;
-      width: 8rem;
-      height: 8rem;
-      border-radius: 8rem;
-    }
-
-    .name {
-      text-align: center;
-    }
-
-    .num {
-      display: flex;
-      margin: 0 auto 1rem;
-      width: 80%;
-
-      > div {
+      .name {
         text-align: center;
-        flex: auto;
+      }
 
-        &:first-child {
-          border-right: 1px solid #333;
-        }
+      .num {
+        display: flex;
+        margin: 0 auto 1rem;
+        width: 80%;
 
-        i {
-          margin-right: 0.2rem;
+        > div {
+          text-align: center;
+          flex: auto;
+
+          &:first-child {
+            border-right: 1px solid #333;
+          }
+
+          i {
+            margin-right: 0.2rem;
+          }
         }
       }
     }
+
+    .tag-box {
+      margin-top: 2rem;
+      padding: 1rem;
+    }
+  }
+}
+
+@media (max-width: $MQMobile) {
+  .blog-review {
+    display: none !important;
   }
 }
 </style>

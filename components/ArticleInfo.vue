@@ -2,39 +2,42 @@
   <div class="article-Info">
     <i
       class="iconfont zpicon-person"
-      v-if="articleInfo.frontmatter.author || $themeConfig.author || $site.title"
+      v-if="
+        articleInfo.frontmatter.author || $themeConfig.author || $site.title
+      "
     >
-      <span class="ml5">{{ articleInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
+      <span class="ml5">{{
+        articleInfo.frontmatter.author || $themeConfig.author || $site.title
+      }}</span>
     </i>
     <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date">
-      <span class="ml5">{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span>
+      <span class="ml5">{{
+        new Date(articleInfo.frontmatter.date).toLocaleDateString()
+      }}</span>
     </i>
     <!-- <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date"></i> -->
     <!-- <span>{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span> -->
     <i class="iconfont zpicon-book1 tags" v-if="articleInfo.frontmatter.tag">
-      <span
-        v-for="(subItem, subIndex) in articleInfo.frontmatter.tag"
-        :key="subIndex"
-        class="tag-item"
-        :class="{ 'active': currentTag == subItem }"
-        @click="goTags(articleInfo.frontmatter.tag)"
-      >{{subItem}}</span>
+      <span class="tag-item" @click="goTags(articleInfo.frontmatter.tag)">{{
+        articleInfo.frontmatter.tag
+      }}</span>
     </i>
-    <AccessCount :path="isList?'/':articleInfo.path" />
+    <AccessCount :path="isList ? '/' : articleInfo.path" />
   </div>
 </template>
 <!-- <AccessNumber :idVal="articleInfo.path" :numStyle="numStyle"></AccessNumber> -->
 
 <script>
 import AccessCount from "./Valine/AccessCount";
+import Tags from "@theme/layouts/Tags.vue";
 
 export default {
-  components: { AccessCount },
   name: "ArticleInfo",
+  components: { AccessCount, Tags },
   props: {
     articleInfo: { type: Object, default: {} },
     currentTag: { type: String, default: "" },
-    isList: { type: Boolean, default: false } //是否
+    isList: { type: Boolean, default: false }, //是否
   },
   mounted() {},
   data() {
@@ -42,19 +45,16 @@ export default {
       numStyle: {
         fontSize: ".9rem",
         fontWeight: "normal",
-        color: "#999"
-      }
+        color: "#999",
+      },
     };
   },
 
-  mounted() {
-  },
   methods: {
     goTags(tag) {
-      console.log(tag);
       window.location.href = `/tag/?tag=${tag}`;
-    }
-  }
+    },
+  },
 };
 </script>
 

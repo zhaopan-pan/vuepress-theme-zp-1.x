@@ -1,40 +1,54 @@
 <template>
-  <CommonLayout>
-    <div class="util-container">
-      <div class="tags">
-        <span
-          class="single-tag"
-          v-for="(item,index) in tagsList"
-          :key="index"
-          :class="{'active':currentSelectTag==item.name}"
-          :style="{ 'backgroundColor': item.color }"
-          @click="clickTag(item.name)"
-        >{{item.name||""}}</span>
-      </div>
-      <!-- created中组装的数据在嵌套组件不能for循环渲染 单条可以 ？？？-->
-      <ArticleCard
-        class="blog-list"
-        :dataList="posts"
-        :currentPage="currentPage"
+  <div>
+    <div v-if="justShowTags">
+      <TagsItem
+        :tagsList="tagsList"
+        :justShowTags="justShowTags"
+        :getArticleListByTag="getArticleListByTag"
         :currentTag="currentSelectTag"
       />
-      <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
     </div>
-  </CommonLayout>
+    <CommonLayout v-else>
+      <div class="util-container">
+        <div class="tags">
+          <TagsItem
+            :tagsList="tagsList"
+            :getArticleListByTag="getArticleListByTag"
+            :currentTag="currentSelectTag"
+          />
+        </div>
+        <!-- created中组装的数据在嵌套组件不能for循环渲染 单条可以 ？？？-->
+        <ArticleCard
+          class="blog-list"
+          :dataList="posts"
+          :currentPage="currentPage"
+          :currentTag="currentTag"
+        />
+        <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
+      </div>
+    </CommonLayout>
+  </div>
 </template>
 
 <script>
 import CommonLayout from "@theme/components/CommonLayout";
 import ArticleCard from "@theme/components/ArticleCard";
+import TagsItem from "@theme/components/TagsItem";
 // import Pagation from "@theme/components/Pagation.vue";
 import mixin from "@theme/mixins/index.js";
 
 export default {
+  name: "Tags",
   mixins: [mixin],
   components: {
     CommonLayout,
-    ArticleCard
+    ArticleCard,
+    TagsItem,
     // Pagation
+  },
+  props: {
+    justShowTags: { type: Boolean, default: () => false },
+    currentTag: { type: String, default: () => "" },
   },
   data() {
     return {
@@ -43,7 +57,7 @@ export default {
       currentSelectTag: "", //当前选中tag
       posts: [], //文章list
       currentPage: Number(1), //页码
-      pageSize: 3 //每页条数
+      pageSize: 3, //每页条数
     };
   },
   created() {
@@ -52,9 +66,8 @@ export default {
       ? this.$route.query.tag
       : this.$tags.list[0].name;
     if (tags && tags.list) {
-      console.log(tags.list);
       const tagArr = tags.list;
-      tagArr.map(item => {
+      tagArr.map((item) => {
         item.color = this.tagColor();
         return item;
       });
@@ -65,12 +78,11 @@ export default {
   computed: {},
 
   mounted() {
-    console.log(this.$route.query);
+    // console.log(this.$route.query);
     // const tags = this.$tags;
     // const currentTag = this.$route.query.tag
-    //   ? this.$route.query.tag
+    // ? this.$route.query.tag
     //   : this.$tags.list[0].name;
-
     // if (tags && tags.list) {
     //   console.log(tags.list);
     //   const tagArr = tags.list;
@@ -84,19 +96,17 @@ export default {
   },
 
   methods: {
-    clickTag: function(tagName) {
+    clickTag: function (tagName) {
       this.currentSelectTag = tagName;
       this.getArticleListByTag(tagName);
-      console.log(this.list);
     },
-    tagColor: function() {
+    tagColor: function () {
       const colorArr = ["#E6A23C", "#F56C6C", "#909399", "#67C23A", "#409EFF"];
       const tagColorIndex = Math.floor(Math.random() * colorArr.length);
       return colorArr[tagColorIndex];
     },
     // 筛选数据
-    getArticleListByTag: function(currentTag) {
-      console.log(currentTag);
+    getArticleListByTag: function (currentTag) {
       this.currentSelectTag = currentTag;
       let posts = this.$tags.map[currentTag].pages;
       setTimeout(() => {
@@ -118,31 +128,12 @@ export default {
     getCurrentPage(page) {
       this.currentPage = Number(page);
       this.$page.currentPage = page;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
 .tags {
   margin: 3rem auto;
-
-  .single-tag {
-    padding: 5px 10px;
-    margin: 5px;
-    border-radius: 4px;
-    display: inline-flex;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    transition: all 0.9s;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-
-    &.active {
-      transform: scale(1.2);
-    }
-  }
 }
 </style>

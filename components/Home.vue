@@ -2,7 +2,7 @@
   <main
     class="util-container home"
     aria-labelledby="main-title"
-    :class="pageShow?'zp-show': 'zp-hide'"
+    :class="pageShow ? 'zp-show' : 'zp-hide'"
   >
     <Content class="custom" custom />
 
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       pageShow: false,
-      currentPage: 1
+      currentPage: 1,
     };
   },
   computed: {
@@ -31,15 +31,15 @@ export default {
     actionLink() {
       return {
         link: this.data.actionLink,
-        text: this.data.actionText
+        text: this.data.actionText,
       };
-    }
+    },
   },
   mounted() {
     this.pageShow = true;
   },
 
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -189,10 +189,6 @@ export default {
     .feature {
       max-width: 100%;
       padding: 0 2.5rem;
-    }
-
-    .blog-review {
-      display: none;
     }
   }
 }

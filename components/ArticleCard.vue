@@ -3,18 +3,25 @@
     <div
       v-for="(item, index) in dataList"
       :key="item.path"
-      v-show="index >= (currentPageNum * pageSize - pageSize) && index < currentPageNum * pageSize"
+      v-show="
+        index >= currentPageNum * pageSize - pageSize &&
+        index < currentPageNum * pageSize
+      "
       class="abstract-item"
     >
       <div class="title">
-        <router-link :to="item.path">{{item.title}}</router-link>
+        <router-link :to="item.path">{{ item.title }}</router-link>
       </div>
       <!-- <i class="zpicon-up iconfont" />  v-show="index >= (currentPage * pageSize - pageSize) && index < currentPage * pageSize"
       <i class="zpicon-Stone-airplane iconfont" />
       <i class="zpicon-date iconfont" />-->
       <div class="abstract-info" v-html="item.excerpt"></div>
       <hr />
-      <ArticleInfo :articleInfo="item" :currentTag="currentTag" :isList="true"></ArticleInfo>
+      <ArticleInfo
+        :articleInfo="item"
+        :currentTag="currentTag"
+        :isList="true"
+      ></ArticleInfo>
     </div>
     <slot />
     <pagation
@@ -37,40 +44,36 @@ export default {
   props: {
     dataList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     currentTag: {
       type: String,
-      default: ""
+      default: "",
     },
     pageSize: {
       type: Number,
-      default: 10
+      default: 10,
     },
     currentPage: {
       type: Number,
-      default: 1
+      default: 1,
     },
     showPagation: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return { currentPageNum: 1 };
   },
-  mounted() {
-    console.log(this.dataList);
-  },
+  mounted() {},
   methods: {
     getCurrentPage(page) {
-      console.log(this.$page);
-      console.log(page);
       this.currentPageNum = Number(page);
       // this.currentPage = Number(page);
       this.$page.currentPage = page;
-    }
-  }
+    },
+  },
 };
 </script>
 

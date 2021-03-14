@@ -282,3 +282,8 @@ export function deepCopy(arg) {
     return arg;
   }
 }
+
+
+export function goTags(tag) {
+  window.location.href = `/tag/?tag=${tag}`;
+}
