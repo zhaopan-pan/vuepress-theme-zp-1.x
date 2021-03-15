@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import ArticleCard from "@theme/components/ArticleCard.vue";
-
 import { goTags } from "@theme/util";
 export default {
   name: "TagsItem",
