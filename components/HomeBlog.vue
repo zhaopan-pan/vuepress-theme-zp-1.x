@@ -17,11 +17,15 @@
         </ArticleCard>
         <div class="blog-review">
           <div class="user-info shadow">
-            <img
-              class="personal-img"
-              :src="$withBase($themeConfig.logo)"
-              alt="hero"
-            />
+            <div class="img-box">
+              <div class="img-border">
+                <img
+                  class="personal-img"
+                  :src="$withBase($themeConfig.logo)"
+                  alt="hero"
+                />
+              </div>
+            </div>
             <h3 class="name" v-if="$themeConfig.author || $site.title">
               {{ $themeConfig.author || $site.title }}
             </h3>
@@ -113,8 +117,18 @@ export default {
   },
 };
 </script>
-<style lang="stylus">
+<style lang="stylus" scope>
 @require '../styles/loadMixin.styl';
+
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
 
 .home-blog {
   display: flex;
@@ -131,12 +145,31 @@ export default {
     flex-direction: column;
 
     .user-info {
-      .personal-img {
-        display: block;
-        margin: 2rem auto;
-        width: 8rem;
-        height: 8rem;
-        border-radius: 8rem;
+      .img-box {
+        display: flex;
+        justify-content: center;
+        margin: 4rem auto 3rem;
+
+        .img-border {
+          width: 3.5rem;
+          height: 3.5rem;
+          border: 1px solid rgba(0, 0, 0, 0);
+          border-radius: 4rem;
+          overflow: hidden;
+
+          // -webkit-transform: rotate(360deg);
+          // animation: rotation 3s linear infinite;
+          // -moz-animation: rotation 3s linear infinite;
+          // -webkit-animation: rotation 3s linear infinite;
+          // -o-animation: rotation 3s linear infinite;
+          .personal-img {
+            display: block;
+            width: 4rem;
+            height: 4rem;
+            position: relative;
+            top: -10px;
+          }
+        }
       }
 
       .name {

@@ -24,7 +24,6 @@
           :currentPage="currentPage"
           :currentTag="currentTag"
         />
-        <!-- <pagation :total="posts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage"></pagation> -->
       </div>
     </CommonLayout>
   </div>
@@ -34,7 +33,6 @@
 import CommonLayout from "@theme/components/CommonLayout";
 import ArticleCard from "@theme/components/ArticleCard";
 import TagsItem from "@theme/components/TagsItem";
-// import Pagation from "@theme/components/Pagation.vue";
 import mixin from "@theme/mixins/index.js";
 
 export default {
@@ -44,7 +42,6 @@ export default {
     CommonLayout,
     ArticleCard,
     TagsItem,
-    // Pagation
   },
   props: {
     justShowTags: { type: Boolean, default: () => false },
@@ -77,23 +74,7 @@ export default {
   },
   computed: {},
 
-  mounted() {
-    // console.log(this.$route.query);
-    // const tags = this.$tags;
-    // const currentTag = this.$route.query.tag
-    // ? this.$route.query.tag
-    //   : this.$tags.list[0].name;
-    // if (tags && tags.list) {
-    //   console.log(tags.list);
-    //   const tagArr = tags.list;
-    //   tagArr.map(item => {
-    //     item.color = this.tagColor();
-    //     return item;
-    //   });
-    //   this.tagsList = tagArr || [];
-    //   this.getArticleListByTag(currentTag);
-    // }
-  },
+  mounted() {},
 
   methods: {
     clickTag: function (tagName) {
@@ -112,12 +93,6 @@ export default {
       setTimeout(() => {
         this.posts = this._dateSortByTime(posts);
       }, 100);
-      // this.posts = dateSortByTime(posts);
-      // posts.length > 0
-      //   ? posts.sort((a, b) => {
-      //       return getTimeToSecond(b) - getTimeToSecond(a);
-      //     })
-      //   : [];
       this.getCurrentPage(1);
     },
 

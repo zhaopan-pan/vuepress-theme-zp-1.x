@@ -29,11 +29,10 @@
 
 <script>
 import AccessCount from "./Valine/AccessCount";
-import Tags from "@theme/layouts/Tags.vue";
 import { goTags } from "@theme/util";
 export default {
   name: "ArticleInfo",
-  components: { AccessCount, Tags },
+  components: { AccessCount },
   props: {
     articleInfo: { type: Object, default: {} },
     currentTag: { type: String, default: "" },

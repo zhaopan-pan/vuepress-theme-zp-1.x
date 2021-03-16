@@ -11,12 +11,8 @@
 </template>
 
 <script>
-import ArticleCard from "@theme/components/ArticleCard.vue";
-
-import { posix } from "path";
-
 export default {
-  components: { ArticleCard },
+  components: {},
   data() {
     return {
       pageShow: false,

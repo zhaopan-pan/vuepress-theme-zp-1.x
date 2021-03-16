@@ -12,16 +12,13 @@
       <div class="title">
         <router-link :to="item.path">{{ item.title }}</router-link>
       </div>
-      <!-- <i class="zpicon-up iconfont" />  v-show="index >= (currentPage * pageSize - pageSize) && index < currentPage * pageSize"
-      <i class="zpicon-Stone-airplane iconfont" />
-      <i class="zpicon-date iconfont" />-->
       <div class="abstract-info" v-html="item.excerpt"></div>
       <hr />
       <ArticleInfo
         :articleInfo="item"
         :currentTag="currentTag"
         :isList="true"
-      ></ArticleInfo>
+      />
     </div>
     <slot />
     <pagation
@@ -37,9 +34,8 @@
 <script>
 import ArticleInfo from "@theme/components/ArticleInfo";
 import Pagation from "../components/Pagation.vue";
-
 export default {
-  name: "ArticleCard", //ArticleCard
+  name: "ArticleCard",
   components: { ArticleInfo, Pagation },
   props: {
     dataList: {
@@ -66,6 +62,7 @@ export default {
   data() {
     return { currentPageNum: 1 };
   },
+  created() {},
   mounted() {},
   methods: {
     getCurrentPage(page) {
