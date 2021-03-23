@@ -12,7 +12,7 @@ npm install vuepress-theme-zp
 And then setting it in your docs/.vuepress/config.js file:
 ```js
 module.exports = {
-	theme: 'yuu',
+	theme: 'zp',
 }
 ```
 ## Plugins
