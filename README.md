@@ -2,6 +2,19 @@
 
 >this theme for vuepress
 
+# Installation
+You can add Yuu to your current VuePress project by running:
+
+```sh
+npm install vuepress-theme-zp
+```
+
+And then setting it in your docs/.vuepress/config.js file:
+```js
+module.exports = {
+	theme: 'yuu',
+}
+```
 ## Plugins
 
 The default theme has the following plugin built in:
