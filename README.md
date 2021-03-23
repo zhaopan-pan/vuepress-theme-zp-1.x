@@ -3,6 +3,7 @@
 >this theme for vuepress
 
 # Installation
+
 You can add Yuu to your current VuePress project by running:
 
 ```sh
