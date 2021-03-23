@@ -107,7 +107,7 @@ export default {
     display: inline-block;
     width: auto;
     line-height: 1.8rem;
-    margin: 0.4rem 0.7rem;
+    margin: 0.4rem 0.3rem;
     padding: 0.2rem 0.5rem;
     border: 1px solid #cfd4db;
     border-radius: 0.3rem;

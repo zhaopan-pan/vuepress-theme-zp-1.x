@@ -36,11 +36,14 @@ export default {
       this.backToTopFun();
     },
     handleScroll() {
-      // console.log(window.pageYOffset);
-      this.fromTopNum = window.pageYOffset;
-      const { fromTopNum } = this;
-      if (fromTopNum > 150) {
-        // console.log(this.toTopDom);
+      this.fromTopNum = Math.ceil(window.pageYOffset);
+      // 超过页面的body高度的三分之一
+      if (
+        Math.ceil(
+          (document.body.clientHeight - 57) /
+            (document.body.clientHeight > 10000 ? 7 : 3)
+        ) < this.fromTopNum
+      ) {
         this.toTopDom.style.opacity = 1;
         this.toTopDom.style.zIndex = 1;
         this.toTopDom.style.bottom = "5%";
@@ -51,17 +54,28 @@ export default {
       }
     },
     backToTopFun: function () {
-      const { fromTopNum } = this;
-      const cutFromTopNum = Math.floor(fromTopNum / 15);
-      let num = 0;
-      this.interVal = setInterval(() => {
-        let remainderNum = fromTopNum - cutFromTopNum * num;
-        if (remainderNum < 1 || cutFromTopNum * num - fromTopNum > 0) {
-          clearInterval(this.interVal);
-        }
+      let { fromTopNum } = this;
+      let currentTime = 0, // 初始值
+        allTime = 500, // 最大阈值
+        unit = 10; // 每帧增加单位数
+      const animationSrcoll = () => {
+        currentTime += unit;
+        const remainderNum = this.easeInOut(
+          currentTime,
+          fromTopNum, // 开始
+          -fromTopNum, // 结束
+          allTime
+        );
         window.scrollTo(0, remainderNum);
-        num++;
-      }, 15);
+        if (currentTime <= allTime && fromTopNum > 0) {
+          requestAnimationFrame(animationSrcoll);
+        }
+      };
+      requestAnimationFrame(animationSrcoll);
+    },
+    easeInOut: function (t, b, c, d) {
+      if ((t /= d / 2) < 1) return (c / 2) * t * t + b;
+      return (-c / 2) * (--t * (t - 2) - 1) + b;
     },
   },
   destroyed() {
