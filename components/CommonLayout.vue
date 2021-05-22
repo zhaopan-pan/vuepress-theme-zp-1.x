@@ -1,13 +1,17 @@
 <template>
   <div
     class="theme-container"
-    :class="pageClasses,themeClass"
+    :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
     ref="mostTop"
   >
-    <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" @themeColor="colorValue" />
-
+    <Loading v-if="firstLoad" />
+    <Navbar
+      v-if="shouldShowNavbar"
+      @toggle-sidebar="toggleSidebar"
+      @themeColor="colorValue"
+    />
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
     <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
@@ -25,6 +29,7 @@ import Navbar from "@theme/components/Navbar.vue";
 import Sidebar from "@theme/components/Sidebar.vue";
 import BackToTop from "@theme/components/BackToTop.vue";
 import Valine from "@theme/components/Valine";
+import Loading from "@theme/components/Loading.vue";
 import { resolveSidebarItems } from "../util";
 
 export default {
@@ -32,20 +37,22 @@ export default {
     Sidebar,
     Navbar,
     BackToTop,
-    Valine
+    Valine,
+    Loading,
   },
 
   data() {
     return {
       isSidebarOpen: false,
-      themeClass: []
+      themeClass: [],
+      firstLoad: true,
     };
   },
   props: {
     sidebarShow: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
@@ -101,23 +108,42 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "no-sidebar": !this.shouldShowSidebar
+          "no-sidebar": !this.shouldShowSidebar,
         },
-        userPageClass
+        userPageClass,
       ];
-    }
+    },
   },
 
   mounted() {
-    console.log(this.shouldShowSidebar);
-    this.$router.afterEach(() => {
-      this.isSidebarOpen = false;
-    });
+    // this.firstLoad = false;
+    // this.$router.beforeEach((to, from, next) => {
+    //   if (to.path !== from.path) {
+    //     this.firstLoad = true;
+    //   }
+    //   next();
+    // });
+    // this.$router.afterEach(() => {
+    //   this.isSidebarOpen = false;
+    //   this.firstLoad = false;
+    // });
+    this.handleLoading();
   },
 
   methods: {
+    handleLoading() {
+      const time =
+        this.$page.frontmatter.home &&
+        sessionStorage.getItem("firstLoad") == undefined
+          ? 1000
+          : 0;
+      setTimeout(() => {
+        this.firstLoad = false;
+        if (sessionStorage.getItem("firstLoad") == undefined)
+          sessionStorage.setItem("firstLoad", false);
+      }, time);
+    },
     toggleSidebar(to) {
-      console.log(to);
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
     },
 
@@ -125,7 +151,7 @@ export default {
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY
+        y: e.changedTouches[0].clientY,
       };
     },
 
@@ -140,21 +166,18 @@ export default {
         }
       }
     },
-    colorValue: function(val) {
-      console.log(val);
+    colorValue: function (val) {
       // this.themeClass = {
       //   "$accentColor": val
       // };
       this.themeClass = [
         {
-          "black-theme": true
-        }
+          "black-theme": true,
+        },
       ];
-      console.log(this.$refs.mostTop.classList);
-
       document.body.classList.add("black-theme");
-    }
-  }
+    },
+  },
 };
 </script>
 

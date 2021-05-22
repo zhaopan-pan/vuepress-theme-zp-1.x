@@ -30,13 +30,13 @@
               {{ $themeConfig.author || $site.title }}
             </h3>
             <div class="num">
-              <div>
+              <div title="文章数">
                 <!-- <i class="zpicon-up iconfont" />
             <i class="zpicon-Stone-airplane iconfont" />
             <i class="zpicon-date iconfont" />-->
                 {{ posts.length }}
               </div>
-              <div>{{ $tags.length }}</div>
+              <div title="标签数">{{ $tags.length }}</div>
             </div>
           </div>
           <div class="tag-box shadow">
