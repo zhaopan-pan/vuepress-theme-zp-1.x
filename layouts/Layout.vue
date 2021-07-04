@@ -12,18 +12,18 @@
 </template>
 
 <script>
-import CommonLayout from "@theme/components/CommonLayout";
-import Home from "@theme/components/Home.vue";
-import HomeBlog from "@theme/components/HomeBlog.vue";
-import Page from "@theme/components/Page.vue";
-import { resolveSidebarItems } from "../util";
+import CommonLayout from '@theme/components/CommonLayout'
+import Home from '@theme/components/Home.vue'
+import HomeBlog from '@theme/components/HomeBlog.vue'
+import Page from '@theme/components/Page.vue'
+import { resolveSidebarItems } from '../util'
 
 export default {
   components: { Home, HomeBlog, Page, CommonLayout },
   data() {
     return {
       pageShow: false,
-    };
+    }
   },
   computed: {
     sidebarItems() {
@@ -32,24 +32,23 @@ export default {
         this.$page.regularPath,
         this.$site,
         this.$localePath
-      );
+      )
     },
     isHome() {
-      const { type } = this.$themeConfig;
+      const { type } = this.$themeConfig
       if (type !== undefined) {
-        return type == "blog" ? "HomeBlog" : type;
+        return type == 'blog' ? 'HomeBlog' : type
       }
-      return "Home";
+      return 'Home'
     },
   },
 
   mounted() {
-    console.log(location);
-    this.pageShow = true;
+    this.pageShow = true
   },
 
   methods: {},
-};
+}
 </script>
 
 <style src="prismjs/themes/prism-tomorrow.css"></style>

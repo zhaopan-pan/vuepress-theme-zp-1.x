@@ -2,15 +2,24 @@
   <main class="page">
     <slot name="top" />
     <div class="theme-default-content">
-      <h1 class="article-title" v-if="isAticle">{{page.title||page.frontmatter.title||"-"}}</h1>
-      <ArticleInfo :articleInfo="page" :currentTag="page.tag" v-if="isAticle" class="custom"></ArticleInfo>
+      <h1 class="article-title" v-if="isAticle">
+        {{ page.title || page.frontmatter.title || '-' }}
+      </h1>
+      <ArticleInfo
+        :articleInfo="page"
+        :currentTag="page.tag"
+        v-if="isAticle"
+        class="custom"
+      ></ArticleInfo>
       <hr v-if="isAticle" />
       <Content />
     </div>
     <TimeLine v-if="isTimeLine"></TimeLine>
     <footer class="page-edit" v-if="!isTimeLine">
       <div class="edit-link" v-if="editLink">
-        <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
+        <a :href="editLink" target="_blank" rel="noopener noreferrer">{{
+          editLinkText
+        }}</a>
         <OutboundLink />
       </div>
 
@@ -24,11 +33,16 @@
       <p class="inner">
         <span v-if="prev" class="prev">
           ←
-          <router-link v-if="prev" class="prev" :to="prev.path">{{ prev.title || prev.path }}</router-link>
+          <router-link v-if="prev" class="prev" :to="prev.path">{{
+            prev.title || prev.path
+          }}</router-link>
         </span>
 
         <span v-if="next" class="next">
-          <router-link v-if="next" :to="next.path">{{ next.title || next.path }}</router-link>→
+          <router-link v-if="next" :to="next.path">{{
+            next.title || next.path
+          }}</router-link
+          >→
         </span>
       </p>
     </div>
@@ -38,76 +52,76 @@
 </template>
 
 <script>
-import { resolvePage, outboundRE, endingSlashRE } from "../util";
-import TimeLine from "@theme/components/TimeLine";
-import ArticleInfo from "./ArticleInfo";
+import { resolvePage, outboundRE, endingSlashRE } from '../util'
+import TimeLine from '@theme/components/TimeLine'
+import ArticleInfo from './ArticleInfo'
 
 export default {
-  props: ["sidebarItems"],
+  props: ['sidebarItems'],
   components: { TimeLine, ArticleInfo },
   computed: {
     lastUpdated() {
-      return this.$page.lastUpdated;
+      return this.$page.lastUpdated
     },
     isTimeLine() {
-      return this.$page.frontmatter.isTimeLine;
+      return this.$page.frontmatter.isTimeLine
     },
     isCategory() {
-      return this.$page.path.includes("categories");
+      return this.$page.path.includes('categories')
     },
     isAticle() {
       return (
         !this.$page.frontmatter.isTimeLine &&
         this.$page.frontmatter.sidebar == false &&
         !this.$page.frontmatter.noTitle == true
-      );
+      )
     },
     page() {
-      return this.$page;
+      return this.$page
     },
     lastUpdatedText() {
-      if (typeof this.$themeLocaleConfig.lastUpdated === "string") {
-        return this.$themeLocaleConfig.lastUpdated;
+      if (typeof this.$themeLocaleConfig.lastUpdated === 'string') {
+        return this.$themeLocaleConfig.lastUpdated
       }
-      if (typeof this.$site.themeConfig.lastUpdated === "string") {
-        return this.$site.themeConfig.lastUpdated;
+      if (typeof this.$site.themeConfig.lastUpdated === 'string') {
+        return this.$site.themeConfig.lastUpdated
       }
-      return "Last Updated";
+      return 'Last Updated'
     },
 
     prev() {
-      const prev = this.$page.frontmatter.prev;
+      const prev = this.$page.frontmatter.prev
       if (prev === false) {
-        return;
+        return
       } else if (prev) {
-        return resolvePage(this.$site.pages, prev, this.$route.path);
+        return resolvePage(this.$site.pages, prev, this.$route.path)
       } else {
-        return resolvePrev(this.$page, this.sidebarItems);
+        return resolvePrev(this.$page, this.sidebarItems)
       }
     },
 
     next() {
-      const next = this.$page.frontmatter.next;
+      const next = this.$page.frontmatter.next
       if (next === false) {
-        return;
+        return
       } else if (next) {
-        return resolvePage(this.$site.pages, next, this.$route.path);
+        return resolvePage(this.$site.pages, next, this.$route.path)
       } else {
-        return resolveNext(this.$page, this.sidebarItems);
+        return resolveNext(this.$page, this.sidebarItems)
       }
     },
 
     editLink() {
       if (this.$page.frontmatter.editLink === false) {
-        return;
+        return
       }
       const {
         repo,
         editLinks,
-        docsDir = "",
-        docsBranch = "master",
-        docsRepo = repo
-      } = this.$site.themeConfig;
+        docsDir = '',
+        docsBranch = 'master',
+        docsRepo = repo,
+      } = this.$site.themeConfig
 
       if (docsRepo && editLinks && this.$page.relativePath) {
         return this.createEditLink(
@@ -116,7 +130,7 @@ export default {
           docsDir,
           docsBranch,
           this.$page.relativePath
-        );
+        )
       }
     },
 
@@ -125,66 +139,63 @@ export default {
         this.$themeLocaleConfig.editLinkText ||
         this.$site.themeConfig.editLinkText ||
         `Edit this page`
-      );
-    }
-  },
-  mounted() {
-    console.log(this.$page);
+      )
+    },
   },
   methods: {
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {
-      const bitbucket = /bitbucket.org/;
+      const bitbucket = /bitbucket.org/
       if (bitbucket.test(repo)) {
-        const base = outboundRE.test(docsRepo) ? docsRepo : repo;
+        const base = outboundRE.test(docsRepo) ? docsRepo : repo
         return (
-          base.replace(endingSlashRE, "") +
+          base.replace(endingSlashRE, '') +
           `/src` +
           `/${docsBranch}/` +
-          (docsDir ? docsDir.replace(endingSlashRE, "") + "/" : "") +
+          (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '') +
           path +
           `?mode=edit&spa=0&at=${docsBranch}&fileviewer=file-view-default`
-        );
+        )
       }
 
       const base = outboundRE.test(docsRepo)
         ? docsRepo
-        : `https://github.com/${docsRepo}`;
+        : `https://github.com/${docsRepo}`
       return (
-        base.replace(endingSlashRE, "") +
+        base.replace(endingSlashRE, '') +
         `/edit` +
         `/${docsBranch}/` +
-        (docsDir ? docsDir.replace(endingSlashRE, "") + "/" : "") +
+        (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '') +
         path
-      );
-    }
-  }
-};
+      )
+    },
+  },
+}
 
 function resolvePrev(page, items) {
-  return find(page, items, -1);
+  return find(page, items, -1)
 }
 
 function resolveNext(page, items) {
-  return find(page, items, 1);
+  return find(page, items, 1)
 }
 
 function find(page, items, offset) {
-  const res = [];
-  flatten(items, res);
+  const res = []
+  flatten(items, res)
   for (let i = 0; i < res.length; i++) {
-    const cur = res[i];
-    if (cur.type === "page" && cur.path === decodeURIComponent(page.path)) {
-      return res[i + offset];
+    const cur = res[i]
+    if (cur.type === 'page' && cur.path === decodeURIComponent(page.path)) {
+      return res[i + offset]
     }
   }
 }
 
 function flatten(items, res) {
   for (let i = 0, l = items.length; i < l; i++) {
-    if (items[i].type === "group") {
-      flatten(items[i].children || [], res);
+    if (items[i].type === 'group') {
+      flatten(items[i].children || [], res)
     } else {
-      res.push(items[i]);
+      res.push(items[i])
     }
   }
 }
