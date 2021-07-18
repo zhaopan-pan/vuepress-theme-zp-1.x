@@ -19,7 +19,6 @@
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
     <slot></slot>
-    <Valine v-if="isShowComment" :hasSidebar="shouldShowSidebar" />
     <BackToTop />
   </div>
 </template>

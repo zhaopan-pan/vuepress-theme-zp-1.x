@@ -48,6 +48,7 @@
     </div>
 
     <slot name="bottom" />
+    <Valine v-if="isShowComment" />
   </main>
 </template>
 
@@ -55,11 +56,24 @@
 import { resolvePage, outboundRE, endingSlashRE } from '../util'
 import TimeLine from '@theme/components/TimeLine'
 import ArticleInfo from './ArticleInfo'
+import Valine from '@theme/components/Valine'
 
 export default {
   props: ['sidebarItems'],
-  components: { TimeLine, ArticleInfo },
+  components: { TimeLine, ArticleInfo, Valine },
   computed: {
+    isShowComment() {
+      return (
+        (!this.$page.frontmatter.home &&
+          !this.$page.frontmatter.isTag &&
+          !this.$page.frontmatter.isTimeLine &&
+          !this.$page.path.includes('categories') &&
+          (this.$page.frontmatter.comments !== undefined
+            ? this.$page.frontmatter.comments
+            : true)) ||
+        false
+      )
+    },
     lastUpdated() {
       return this.$page.lastUpdated
     },
@@ -72,7 +86,6 @@ export default {
     isAticle() {
       return (
         !this.$page.frontmatter.isTimeLine &&
-        this.$page.frontmatter.sidebar == false &&
         !this.$page.frontmatter.noTitle == true
       )
     },
