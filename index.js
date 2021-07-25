@@ -38,8 +38,6 @@ module.exports = (options, ctx) => ({
             id: 'categories',
             keys: ['category'],
             path: '/categories/',
-            frontmatter: { title: 'Category', sidebar: true },//注册页面的自定义元数据
-            layout: 'Category',
             scopeLayout: 'Category'
           },
         ]
