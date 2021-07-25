@@ -1,19 +1,19 @@
 <template>
-  <i class="iconfont zpicon-view" v-if="path != '/'">
-    <!-- id 将作为查询条件 -->
-    <span
-      :id="getPath(path)"
-      class="leancloud_visitors ml5"
-      data-flag-title="Your Article Title"
-    >
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  </i>
+  <!-- id 将作为查询条件 -->
+  <span
+    :id="getPath(path)"
+    class="leancloud_visitors ml5"
+    data-flag-title="Your Article Title"
+  >
+    <span class="leancloud-visitors-count"></span>
+  </span>
 </template>
 
 <script>
+import ZpIcon from '@theme/components/ZpIcon'
 export default {
   name: 'AccessCount',
+  components: { ZpIcon },
   props: {
     path: {
       type: String,

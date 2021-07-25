@@ -1,67 +1,71 @@
 <template>
   <div class="vcomment" v-if="data.comments !== false">
-    <div id="vcomments"></div>
+    <div id="vcomments" v-show="commentsShow"></div>
   </div>
 </template>
 
 <script>
-import { isActive, hashRE, groupHeaders } from "../../util";
+import { isActive, hashRE, groupHeaders } from '../../util'
 export default {
-  name: "Valine",
+  name: 'Valine',
   props: {
     hasSidebar: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+    commentsShow: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     data() {
-      return this.$page.frontmatter;
-    }
+      return this.$page.frontmatter
+    },
   },
   mounted() {
-    console.log(this.hasSidebar);
-    this.createValine();
+    console.log(this.hasSidebar)
+    this.createValine()
   },
 
   methods: {
     createValine() {
-      const valineConfig = this.$themeConfig.valineConfig;
-      if (!valineConfig) return;
-      const AV = require("leancloud-storage");
-      const Valine = require("valine");
-      if (typeof window !== "undefined") {
-        this.window = window;
-        window.AV = AV;
+      const valineConfig = this.$themeConfig.valineConfig
+      if (!valineConfig) return
+      const AV = require('leancloud-storage')
+      const Valine = require('valine')
+      if (typeof window !== 'undefined') {
+        this.window = window
+        window.AV = AV
       } else {
-        return;
+        return
       }
       const valine = new Valine({
-        el: "#vcomments",
+        el: '#vcomments',
         appId: valineConfig.appId,
         appKey: valineConfig.appKey,
-        placeholder: valineConfig.placeholder || "just go go",
+        placeholder: valineConfig.placeholder || 'just go go',
         notify: valineConfig.notify || false,
         verify: valineConfig.verify || false,
-        avatar: valineConfig.avatar || "monsterid",
+        avatar: valineConfig.avatar || 'monsterid',
         visitor: valineConfig.visitor || true, // 阅读量统计
         recordIP: valineConfig.recordIP || false,
-        path: window.location.pathname
-      });
-      this.valineRefresh = false;
-    }
+        path: window.location.pathname,
+      })
+      this.valineRefresh = false
+    },
   },
   watch: {
     $route(to, from) {
       if (to.path !== from.path) {
         setTimeout(() => {
           //重新刷新valine
-          this.createValine();
-        }, 300);
+          this.createValine()
+        }, 300)
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="stylus" scoped>

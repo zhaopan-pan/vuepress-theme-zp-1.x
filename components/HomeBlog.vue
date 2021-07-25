@@ -44,52 +44,55 @@
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   </main>
 </template>
 
 <script>
-import ArticleCard from "@theme/components/ArticleCard.vue";
-import HomeBg from "@theme/components/HomeBg.vue";
-import Tag from "@theme/layouts/Tags.vue";
+import ArticleCard from '@theme/components/ArticleCard.vue'
+import HomeBg from '@theme/components/HomeBg.vue'
+import Footer from '@theme/components/Footer.vue'
+import Tag from '@theme/layouts/Tags.vue'
 export default {
-  name: "HomeBlog",
+  name: 'HomeBlog',
   components: {
     ArticleCard,
     HomeBg,
     Tag,
+    Footer,
   },
   data() {
     return {
       pageShow: false,
       currentPage: 1,
-    };
+    }
   },
   computed: {
     data() {
-      return this.$page.frontmatter;
+      return this.$page.frontmatter
     },
     posts() {
-      let posts = this.$site.pages;
+      let posts = this.$site.pages
       posts = posts.filter((item) => {
-        const { home, isTimeLine, date, tag } = item.frontmatter;
-        return !(home == true || date === undefined || tag === undefined);
-      });
+        const { home, isTimeLine, date, tag } = item.frontmatter
+        return !(home == true || date === undefined || tag === undefined)
+      })
       posts.sort((a, b) => {
-        return this._getTimeNum(b) - this._getTimeNum(a);
-      });
+        return this._getTimeNum(b) - this._getTimeNum(a)
+      })
       // console.log(posts);
-      return posts;
+      return posts
     },
     actionLink() {
       return {
         link: this.data.actionLink,
         text: this.data.actionText,
-      };
+      }
     },
   },
   mounted() {
-    this.pageShow = true;
+    this.pageShow = true
     // console.log(this);
     // let posts = this.$site.pages;
     // posts = posts.filter(item => {
@@ -105,17 +108,17 @@ export default {
   methods: {
     // 获取时间的数字类型
     _getTimeNum(date) {
-      return parseInt(new Date(date.frontmatter.date).getTime());
+      return parseInt(new Date(date.frontmatter.date).getTime())
     },
     getCurrentPage(page) {
-      this.currentPage = Number(page);
-      this.$page.currentPage = page;
+      this.currentPage = Number(page)
+      this.$page.currentPage = page
       setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 100);
+        window.scrollTo(0, 0)
+      }, 100)
     },
   },
-};
+}
 </script>
 <style lang="stylus" scope>
 @require '../styles/loadMixin.styl';

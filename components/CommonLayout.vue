@@ -115,9 +115,15 @@ export default {
 
   mounted() {
     this.handleLoading()
+    this.initRouterHandler()
   },
 
   methods: {
+    initRouterHandler() {
+      this.$router.afterEach(() => {
+        this.isSidebarOpen = false
+      })
+    },
     handleLoading() {
       const time =
         this.$page.frontmatter.home &&

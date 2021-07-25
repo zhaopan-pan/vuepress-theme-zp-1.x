@@ -1,5 +1,5 @@
 <template>
-  <CommonLayout :sidebarShow="false">
+  <CommonLayout :sidebarShow="true">
     <div class="util-container">
       <div class="categories">
         <router-link

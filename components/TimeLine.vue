@@ -40,7 +40,6 @@ export default {
       this.$router.push({ path: path });
     },
     createTimeLineData: function() {
-      console.log(this.$site.pages);
       let allPageData = deepCopy(this.$site.pages);
       // let allPageData = JSON.stringify(this.$site.pages);
       if (allPageData.length == 0 || !allPageData) return;

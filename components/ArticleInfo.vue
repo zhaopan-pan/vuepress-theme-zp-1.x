@@ -1,57 +1,60 @@
 <template>
   <div class="article-Info">
-    <i
-      class="iconfont zpicon-person"
-      v-if="
-        articleInfo.frontmatter.author || $themeConfig.author || $site.title
-      "
-    >
-      <span class="ml5">{{
-        articleInfo.frontmatter.author || $themeConfig.author || $site.title
-      }}</span>
-    </i>
-    <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date">
-      <span class="ml5">{{
-        new Date(articleInfo.frontmatter.date).toLocaleDateString()
-      }}</span>
-    </i>
-    <!-- <i class="iconfont zpicon-date" v-if="articleInfo.frontmatter.date"></i> -->
-    <!-- <span>{{ new Date(articleInfo.frontmatter.date).toLocaleDateString() }}</span> -->
-    <i class="iconfont zpicon-book1 tags" v-if="articleInfo.frontmatter.tag">
-      <span class="tag-item" @click="goTags(articleInfo.frontmatter.tag)">{{
-        articleInfo.frontmatter.tag
-      }}</span>
-    </i>
-    <AccessCount :path="isList ? '/' : articleInfo.path" />
+    <ZpIcon icon="person" v-if="title" :text="title" />
+    <ZpIcon
+      icon="date"
+      v-if="articleInfo.frontmatter.date"
+      :text="new Date(articleInfo.frontmatter.date).toLocaleDateString()"
+    />
+    <ZpIcon
+      icon="book1"
+      isTag
+      :clickEv="() => goTags(articleInfo.frontmatter.tag)"
+      v-if="articleInfo.frontmatter.tag"
+      :text="articleInfo.frontmatter.tag"
+    />
+    <ZpIcon icon="view" hasSlot v-if="!isList">
+      <AccessCount :path="isList ? '/' : articleInfo.path" />
+    </ZpIcon>
   </div>
 </template>
 <!-- <AccessNumber :idVal="articleInfo.path" :numStyle="numStyle"></AccessNumber> -->
 
 <script>
-import AccessCount from "./Valine/AccessCount";
-import { goTags } from "@theme/util";
+import AccessCount from '@theme/components/Valine/AccessCount'
+import { goTags } from '@theme/util'
+import ZpIcon from '@theme/components/ZpIcon'
 export default {
-  name: "ArticleInfo",
-  components: { AccessCount },
+  name: 'ArticleInfo',
+  components: { AccessCount, ZpIcon },
   props: {
     articleInfo: { type: Object, default: {} },
-    currentTag: { type: String, default: "" },
+    currentTag: { type: String, default: '' },
     isList: { type: Boolean, default: false }, //是否
+  },
+  computed: {
+    title() {
+      return (
+        this.articleInfo.frontmatter.author ||
+        this.$themeConfig.author ||
+        this.$site.title
+      )
+    },
   },
   mounted() {},
   data() {
     return {
       numStyle: {
-        fontSize: ".9rem",
-        fontWeight: "normal",
-        color: "#999",
+        fontSize: '.9rem',
+        fontWeight: 'normal',
+        color: '#999',
       },
       goTags: goTags,
-    };
+    }
   },
 
   methods: {},
-};
+}
 </script>
 
 <style lang="stylus" scoped>
