@@ -48,9 +48,7 @@ export default {
     return {}
   },
   computed: {},
-  mounted() {
-    console.log('footer')
-  },
+  mounted() {},
 }
 </script>
 <style lang="stylus" scoped>

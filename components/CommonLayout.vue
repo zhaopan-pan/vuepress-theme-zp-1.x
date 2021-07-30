@@ -45,6 +45,7 @@ export default {
       isSidebarOpen: false,
       themeClass: [],
       firstLoad: true,
+      test: 1,
     }
   },
   props: {

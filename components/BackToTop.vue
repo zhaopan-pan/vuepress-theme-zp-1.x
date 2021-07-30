@@ -1,11 +1,27 @@
 <template>
   <div class="back-top" ref="toTop" @click="scrollToTop">
-    <ZpIcon icon="airplane" />
+    <svg
+      t="1627394618689"
+      class="to-top-icon"
+      viewBox="0 0 1024 1024"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      p-id="6226"
+      width="40"
+      height="40"
+    >
+      <path
+        d="M711 404.4C713.9 176.5 526.4 72.7 512 64c-11.5 5.8-201.9 109.6-199 340.4-37.5 26-77.9 69.2-72.1 144.2 5.8 75 80.8 126.9 109.6 124 28.8-2.9 20.2-23.1 20.2-23.1l8.7-40.4s43.3 63.5 54.8 63.5H590c14.4 0 54.8-63.5 54.8-63.5l8.7 40.4s-8.7 20.2 20.2 23.1c28.8 2.9 103.8-49 109.6-124 5.6-75-34.8-118.3-72.3-144.2zM594 282c0 45.3-36.7 82-82 82s-82-36.7-82-82 36.7-82 82-82 82 36.7 82 82zM444 874.8c0 12.6-12.6 25.2-25.2 25.2s-25.2-12.6-25.2-25.2V753.2c0-12.6 12.6-25.2 25.2-25.2s25.2 12.6 25.2 25.2v121.6z m0 0M537.2 933.5c0 12.6-12.6 25.2-25.2 25.2s-25.2-12.6-25.2-25.2V753.2c0-12.6 12.6-25.2 25.2-25.2s25.2 12.6 25.2 25.2v180.3z m0 0M632.9 841.2c0 12.6-12.6 25.2-25.2 25.2s-25.2-12.6-25.2-25.2v-88c0-12.6 12.6-25.2 25.2-25.2s25.2 12.6 25.2 25.2v88z m0 0"
+        p-id="6227"
+        fill="#2c3e50"
+      ></path>
+    </svg>
   </div>
 </template>
 
 <script>
 import ZpIcon from '@theme/components/ZpIcon'
+import animationSrcoll from '@theme/util/animationSrcoll'
 
 export default {
   name: 'BackToTop',
@@ -25,13 +41,10 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      this.toTopDom = this.$refs['toTop']
-      // 通过$refs获取dom元素
-      // this.mostTop = this.$refs.toTop;
-      // 监听这个dom的scroll事件
-      window.addEventListener('scroll', this.handleScroll)
-    })
+    // 通过$refs获取dom元素
+    this.toTopDom = this.$refs['toTop']
+    // 监听这个dom的scroll事件
+    window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
     scrollToTop: function(e) {
@@ -56,33 +69,11 @@ export default {
       }
     },
     backToTopFun: function() {
-      let { fromTopNum } = this
-      let currentTime = 0, // 初始值
-        allTime = 500, // 最大阈值
-        unit = 10 // 每帧增加单位数
-      const animationSrcoll = () => {
-        currentTime += unit
-        const remainderNum = this.easeInOut(
-          currentTime,
-          fromTopNum, // 开始
-          -fromTopNum, // 结束
-          allTime
-        )
-        window.scrollTo(0, remainderNum)
-        if (currentTime <= allTime && fromTopNum > 0) {
-          requestAnimationFrame(animationSrcoll)
-        }
-      }
-      requestAnimationFrame(animationSrcoll)
-    },
-    easeInOut: function(t, b, c, d) {
-      if ((t /= d / 2) < 1) return (c / 2) * t * t + b
-      return (-c / 2) * (--t * (t - 2) - 1) + b
+      animationSrcoll(10, this.fromTopNum, 600)
     },
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
-    this.interVal ? clearInterval(this.interVal) : ''
   },
 }
 </script>
@@ -97,14 +88,13 @@ export default {
   opacity: 0;
   z-index: -1;
   box-shadow: $boxShadow;
-  padding: 5px 2px 2px;
   border-radius: 5px;
   background: #fff;
 
   &:hover
     z-index: -1;
 
-  .zpicon-airplane
-    font-size: 30px;
-    cursor: pointer;
+  .to-top-icon{
+    padding: 3px 5px 0px 5px;
+  }
 </style>

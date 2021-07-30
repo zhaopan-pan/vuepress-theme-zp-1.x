@@ -93,16 +93,6 @@ export default {
   },
   mounted() {
     this.pageShow = true
-    // console.log(this);
-    // let posts = this.$site.pages;
-    // posts = posts.filter(item => {
-    //   const { home, date } = item.frontmatter;
-    //   return !(home == true);
-    // });
-    // posts.sort((a, b) => {
-    //   return this._getTimeNum(b) - this._getTimeNum(a);
-    // });
-    // console.log(posts);
   },
 
   methods: {
