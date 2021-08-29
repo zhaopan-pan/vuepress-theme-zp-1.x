@@ -70,8 +70,7 @@ export default {
     },
     postsData() {
       const getCategoriesMap = this.getCategories.map;
-      console.log(getCategoriesMap[this.getCurrentCategoryName].pages);
-      return this._dateSortByTime(
+      return this.$dateSortByTime(
         getCategoriesMap[this.getCurrentCategoryName].pages
       );
     },
@@ -89,8 +88,6 @@ export default {
       this.$emit("currentTag", tag);
     },
     getCurrentPage(page) {
-      console.log(this.$page);
-      console.log(page);
       this.currentPage = Number(page);
       this.$page.currentPage = page;
     },

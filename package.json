@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-zp",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "vuepress'theme",
   "main": "index.js",
   "publishConfig": {
@@ -17,7 +17,7 @@
     "vuepress",
     "generator"
   ],
-  "author": "zp",
+  "author": "zhaopan",
   "maintainers": [
     {
       "name": "zhaopan",
@@ -40,5 +40,8 @@
     "stylus-loader": "^3.0.2",
     "valine": "^1.3.10",
     "vuepress-plugin-container": "^2.0.0"
+  },
+  "devDependencies": {
+    "vuepress-plugin-smooth-scroll": "^0.0.10"
   }
 }

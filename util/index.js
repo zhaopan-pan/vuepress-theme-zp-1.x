@@ -43,7 +43,7 @@ export function ensureExt(path) {
 }
 
 export function isActive(route, path) {
-  const routeHash = route.hash
+  const routeHash = decodeURI(route.hash)
   const linkHash = getHash(path)
   if (linkHash && routeHash !== linkHash) {
     return false
@@ -128,10 +128,10 @@ export function resolveSidebarItems(page, regularPath, site, localePath) {
     ? themeConfig.locales[localePath] || themeConfig
     : themeConfig
 
-  const pageSidebarConfig = page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar
-  if (pageSidebarConfig === 'auto') {
-    return resolveHeaders(page)
-  }
+  // const pageSidebarConfig = page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar
+  // if (pageSidebarConfig === 'auto') {
+  //   return resolveHeaders(page)
+  // }
 
   const sidebarConfig = localeConfig.sidebar || themeConfig.sidebar
   if (!sidebarConfig) {
@@ -248,13 +248,13 @@ function resolveItem(item, pages, base, groupDepth = 1) {
 export function dateSortByTime(date) {
   return date.length > 0
     ? date.sort((a, b) => {
-      return getTimeToSecond(b) - getTimeToSecond(a);
+      return getTimeToSecond(b) - getTimeToSecond(a)
     })
-    : [];
+    : []
 }
 // 获取时间的毫秒
 export function getTimeToSecond(date) {
-  return parseInt(new Date(date.frontmatter.date).getTime());
+  return parseInt(new Date(date.frontmatter.date).getTime())
 }
 
 /**
@@ -263,27 +263,27 @@ export function getTimeToSecond(date) {
  */
 export function deepCopy(arg) {
   if (arg instanceof Array) {
-    let n = [];
+    let n = []
     for (let i = 0; i < arg.length; ++i) {
-      n[i] = deepCopy(arg[i]);
+      n[i] = deepCopy(arg[i])
     }
-    return n;
+    return n
 
   } else if (arg instanceof Object) {
-    let n = {};
+    let n = {}
     for (let i in arg) {
       if (arg[i] === arg) {//是否循环引用
-        return false;
+        return false
       }
-      n[i] = deepCopy(arg[i]);
+      n[i] = deepCopy(arg[i])
     }
-    return n;
+    return n
   } else {
-    return arg;
+    return arg
   }
 }
 
 
 export function goTags(tag) {
-  window.location.href = `/tag/?tag=${tag}`;
+  window.location.href = `/tag/?tag=${tag}`
 }

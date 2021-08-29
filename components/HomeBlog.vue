@@ -81,7 +81,6 @@ export default {
       posts.sort((a, b) => {
         return this._getTimeNum(b) - this._getTimeNum(a)
       })
-      // console.log(posts);
       return posts
     },
     actionLink() {

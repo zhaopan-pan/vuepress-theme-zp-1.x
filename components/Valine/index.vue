@@ -39,7 +39,7 @@ export default {
       } else {
         return
       }
-      const valine = new Valine({
+      new Valine({
         el: '#vcomments',
         appId: valineConfig.appId,
         appKey: valineConfig.appKey,

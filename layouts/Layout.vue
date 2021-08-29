@@ -1,6 +1,6 @@
 <template>
   <CommonLayout>
-    <div :class="pageShow ? 'zp-show' : 'zp-hide'" class="noscroll">
+    <div :class="pageShow ? '' : ''" class="noscroll">
       <component v-if="$page.frontmatter.home" :is="isHome"></component>
       <!-- <Home v-if="$page.frontmatter.home" /> -->
       <Page v-else :sidebar-items="sidebarItems">

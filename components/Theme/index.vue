@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     chooseTheme: function() {
-      console.log(this.$refs);
     },
     singleColor: function(color) {
       // this.$emit("themeColor",color)

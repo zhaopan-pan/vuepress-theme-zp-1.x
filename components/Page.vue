@@ -1,5 +1,5 @@
 <template>
-  <main class="page">
+  <main class="page" :style="pageStyle">
     <slot name="top" />
     <div class="theme-default-content">
       <h1 class="article-title" v-if="isAticle">
@@ -49,6 +49,7 @@
 
     <slot name="bottom" />
     <Valine v-if="isShowComment" />
+    <SubSidebar />
   </main>
 </template>
 
@@ -57,10 +58,11 @@ import { resolvePage, outboundRE, endingSlashRE } from '../util'
 import TimeLine from '@theme/components/TimeLine'
 import ArticleInfo from './ArticleInfo'
 import Valine from '@theme/components/Valine'
+import SubSidebar from '@theme/components/SubSidebar'
 
 export default {
   props: ['sidebarItems'],
-  components: { TimeLine, ArticleInfo, Valine },
+  components: { TimeLine, ArticleInfo, Valine, SubSidebar },
   computed: {
     isShowComment() {
       return (
@@ -154,6 +156,9 @@ export default {
         `Edit this page`
       )
     },
+    pageStyle() {
+      return this.$showSubSideBar ? {} : { paddingRight: '0' }
+    },
   },
   methods: {
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {
@@ -217,14 +222,10 @@ function flatten(items, res) {
 <style lang="stylus">
 @require '../styles/wrapper.styl';
 
-// 文章标题
-.article-title {
-  // padding-top: 3rem  !important
-}
-
 .page {
   padding-top: 3rem;
   padding-bottom: 2rem;
+  padding-right: 14rem;
   display: block;
 }
 

@@ -81,7 +81,7 @@ export default {
 <style lang="stylus" scoped>
 .back-top
   position: fixed;
-  right: 10%;
+  right: 5%;
   bottom: -5%;
   transform: scaleY(1);
   transition: all 0.5s;
@@ -90,6 +90,7 @@ export default {
   box-shadow: $boxShadow;
   border-radius: 5px;
   background: #fff;
+  cursor: pointer;
 
   &:hover
     z-index: -1;

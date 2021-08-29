@@ -91,7 +91,7 @@ export default {
       this.currentSelectTag = currentTag;
       let posts = this.$tags.map[currentTag].pages;
       setTimeout(() => {
-        this.posts = this._dateSortByTime(posts);
+        this.posts = this.$dateSortByTime(posts);
       }, 100);
       this.getCurrentPage(1);
     },

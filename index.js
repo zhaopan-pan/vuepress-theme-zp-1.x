@@ -60,6 +60,8 @@ module.exports = (options, ctx) => ({
       defaultTitle: {
         '/zh/': '警告'
       }
-    }]
+    }],
+    // 点击文章小标题滑动到所在位置
+    'vuepress-plugin-smooth-scroll',
   ]
 })
