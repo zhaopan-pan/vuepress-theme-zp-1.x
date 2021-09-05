@@ -76,15 +76,6 @@ function isLinkActive(header, $route, path) {
 </script>
 
 <style lang="stylus" scoped>
-.side-bar
-  position fixed
-  top 10rem
-  bottom 10rem
-  right 2rem
-  overflow-y scroll
-  &::-webkit-scrollbar
-    width 0
-    height 0
 .sub-sidebar-wrapper
   width 12rem
   padding-left 0
