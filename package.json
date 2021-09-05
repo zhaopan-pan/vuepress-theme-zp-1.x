@@ -6,9 +6,6 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"scripts": {
-		"publish-theme": "bash .\\theme-publish.sh"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/zhaopande/vuepress-theme-zp.git",
