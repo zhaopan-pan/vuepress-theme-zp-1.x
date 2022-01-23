@@ -48,7 +48,7 @@ export default {
 			this.refreshIndex()
 		},
 	},
-	updated: function() {
+	updated: function () {
 		this.isInViewPortOfOne()
 	},
 	methods: {
@@ -87,8 +87,8 @@ export default {
 				anchors[0].offsetTop == undefined
 			)
 				return
-			setTimeout(function() {
-				window.scrollTo(0, anchors[0].offsetTop + 160)
+			setTimeout(function () {
+				window.scrollTo(0, anchors[0].offsetTop - 60)
 			}, 100)
 		},
 		isInViewPortOfOne() {

@@ -66,9 +66,7 @@ function isLinkActive(header, $route, path) {
 	const active = isActive($route, path + '#' + header.slug)
 	if (active) {
 		setTimeout(() => {
-			document
-				.querySelector(`.zp-side-${decodeURI(header.slug)}`)
-				.scrollIntoView()
+			document.querySelector(`.zp-side-${header.slug}`).scrollIntoView()
 		}, 100)
 	}
 	return active
