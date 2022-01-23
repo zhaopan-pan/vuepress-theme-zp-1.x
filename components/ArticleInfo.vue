@@ -1,59 +1,60 @@
 <template>
-  <div class="article-Info">
-    <ZpIcon icon="person" v-if="title" :text="title" />
-    <ZpIcon
-      icon="date"
-      v-if="articleInfo.frontmatter.date"
-      :text="new Date(articleInfo.frontmatter.date).toLocaleDateString()"
-    />
-    <ZpIcon
-      icon="book1"
-      isTag
-      :clickEv="() => goTags(articleInfo.frontmatter.tag)"
-      v-if="articleInfo.frontmatter.tag"
-      :text="articleInfo.frontmatter.tag"
-    />
-    <ZpIcon icon="view" hasSlot v-if="!isList">
-      <AccessCount :path="isList ? '/' : articleInfo.path" />
-    </ZpIcon>
-  </div>
+	<div class="article-Info">
+		<ZpIcon icon="person" v-if="title" :text="title" />
+		<ZpIcon
+			icon="date"
+			v-if="articleInfo.frontmatter.date"
+			:text="new Date(articleInfo.frontmatter.date).toLocaleDateString()"
+		/>
+		<ZpIcon
+			icon="book1"
+			isTag
+			:clickEv="() => goTags(articleInfo.frontmatter.tag)"
+			v-if="articleInfo.frontmatter.tag"
+			:text="renderTagText(articleInfo.frontmatter.tag)"
+		/>
+		<ZpIcon icon="view" hasSlot v-if="!isList">
+			<AccessCount :path="isList ? '/' : articleInfo.path" />
+		</ZpIcon>
+	</div>
 </template>
 <!-- <AccessNumber :idVal="articleInfo.path" :numStyle="numStyle"></AccessNumber> -->
 
 <script>
 import AccessCount from '@theme/components/Valine/AccessCount'
-import { goTags } from '@theme/util'
+import {goTags, renderTagText} from '@theme/util'
 import ZpIcon from '@theme/components/ZpIcon'
 export default {
-  name: 'ArticleInfo',
-  components: { AccessCount, ZpIcon },
-  props: {
-    articleInfo: { type: Object, default: {} },
-    currentTag: { type: String, default: '' },
-    isList: { type: Boolean, default: false }, //是否
-  },
-  computed: {
-    title() {
-      return (
-        this.articleInfo.frontmatter.author ||
-        this.$themeConfig.author ||
-        this.$site.title
-      )
-    },
-  },
-  mounted() {},
-  data() {
-    return {
-      numStyle: {
-        fontSize: '.9rem',
-        fontWeight: 'normal',
-        color: '#999',
-      },
-      goTags: goTags,
-    }
-  },
+	name: 'ArticleInfo',
+	components: {AccessCount, ZpIcon},
+	props: {
+		articleInfo: {type: Object, default: {}},
+		currentTag: {type: String, default: ''},
+		isList: {type: Boolean, default: false}, //是否
+	},
+	computed: {
+		title() {
+			return (
+				this.articleInfo.frontmatter.author ||
+				this.$themeConfig.author ||
+				this.$site.title
+			)
+		},
+	},
+	mounted() {},
+	data() {
+		return {
+			numStyle: {
+				fontSize: '.9rem',
+				fontWeight: 'normal',
+				color: '#999',
+			},
+			goTags: goTags,
+			renderTagText,
+		}
+	},
 
-  methods: {},
+	methods: {},
 }
 </script>
 

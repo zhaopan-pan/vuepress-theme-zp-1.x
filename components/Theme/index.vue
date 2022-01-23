@@ -25,7 +25,7 @@ export default {
     },
     singleColor: function(color) {
       // this.$emit("themeColor",color)
-      document.body.classList.add("zp-theme-red");
+      document.body.classList.add("zp-theme-night");
     }
   }
 };

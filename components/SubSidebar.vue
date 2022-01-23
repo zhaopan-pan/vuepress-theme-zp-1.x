@@ -1,5 +1,5 @@
 <script>
-import { isActive, hashRE, groupHeaders } from '../util'
+import {isActive, hashRE, groupHeaders} from '../util'
 
 export default {
 	functional: true,
@@ -16,15 +16,15 @@ export default {
 				$themeConfig,
 				$themeLocaleConfig,
 			},
-			props: { item, sidebarDepth },
+			props: {item, sidebarDepth},
 		}
 	) {
 		const headers = $showSubSideBar ? $page.headers || [] : []
 		return h(
 			'ul',
 			{
-				class: { 'sub-sidebar-wrapper': true, 'side-bar': true },
-				style: { width: headers && headers.length > 0 ? '12rem' : '0' },
+				class: {'sub-sidebar-wrapper': true, 'side-bar': true},
+				style: {width: headers && headers.length > 0 ? '12rem' : '0'},
 			},
 			[
 				...headers.map((header) => {
@@ -39,7 +39,7 @@ export default {
 								),
 								[`level-${header.level}`]: true,
 							},
-							attr: { key: header.title },
+							attr: {key: header.title},
 						},
 						[
 							h(
@@ -69,7 +69,7 @@ function isLinkActive(header, $route, path) {
 			document
 				.querySelector(`.zp-side-${decodeURI(header.slug)}`)
 				.scrollIntoView()
-		}, 300)
+		}, 100)
 	}
 	return active
 }
