@@ -5,7 +5,7 @@
         <router-link
           v-for="(item, index) in getRouteData"
           class="categories-item"
-          :class="{ active: getCurrentCategoryName == item.name }"
+          :class="{ active: getPath == item.path }"
           :to="item.path"
           :key="index"
           >{{ item.name }}</router-link
@@ -56,16 +56,7 @@ export default {
     },
 
     getCurrentCategoryName() {
-      const getCategoriesMap = this.getCategories.map;
-      for (let item in getCategoriesMap) {
-        if (this.getPath.includes(item)) {
-          if (this.categoryName && this.categoryName !== item) {
-            this.currentPage = Number(1);
-          }
-          this.categoryName = item;
-          return item;
-        }
-      }
+      return this.getRouteData.find((item) => item.path === this.getPath)?.name;
     },
     postsData() {
       const getCategoriesMap = this.getCategories.map;

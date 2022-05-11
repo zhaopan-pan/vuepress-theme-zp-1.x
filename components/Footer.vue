@@ -12,7 +12,7 @@
         <span
           v-if="
             $themeConfig.startYear &&
-              $themeConfig.startYear != new Date().getFullYear()
+            $themeConfig.startYear != new Date().getFullYear()
           "
           >{{ $themeConfig.startYear }} -
         </span>
@@ -33,61 +33,52 @@
         $themeConfig.cyberSecurityRecord
       }}</a>
     </p>
-    <!-- <Valine :commentsShow="false" /> -->
+    <Comments :commentsShow="false" />
   </footer>
 </template>
 
 <script>
-import ZpIcon from '@theme/components/ZpIcon'
-import AccessCount from '@theme/components/Valine/AccessCount'
-import Valine from '@theme/components/Valine'
+import ZpIcon from "@theme/components/ZpIcon";
+import AccessCount from "@theme/components/Comments/AccessCount";
+import Comments from "@theme/components/Comments";
+
 export default {
-  name: 'Footer',
-  components: { ZpIcon, AccessCount, Valine },
+  name: "Footer",
+  components: { ZpIcon, AccessCount, Comments },
   data() {
-    return {}
+    return {};
   },
   computed: {},
   mounted() {},
-}
+};
 </script>
 <style lang="stylus" scoped>
-.footer{
-   padding: 1.5rem 2.5rem;
-    border-top: 1px solid ($borderColor);
-    text-align: center;
-    color: lighten($textColor, 25%);
-    p{margin :0}
-    a {
-      font-size 14px
-    }
-    > span {
-      margin-left 1rem
-      > i {
-        margin-right .5rem
-      }
-    }
-    .cyber-security {
-      img {
-        margin-right .5rem
-        width 20px
-        height 20px
-        vertical-align middle
-      }
-      a {
-        vertical-align middle
-      }
-    }
-  }
-
-@media (max-width: $MQMobile) {
-  .footer {
-    text-align: left!important;
-    > span {
+.footer
+  padding 1.5rem 2.5rem
+  border-top 1px solid $borderColor
+  text-align center
+  color lighten($textColor, 25%)
+  p
+    margin 0
+  a
+    font-size 14px
+  > span
+    margin-left 1rem
+    > i
+      margin-right 0.5rem
+  .cyber-security
+    img
+      margin-right 0.5rem
+      width 20px
+      height 20px
+      vertical-align middle
+    a
+      vertical-align middle
+@media (max-width $MQMobile)
+  .footer
+    text-align left !important
+    > span
       display block
       margin-left 0
       line-height 2rem
-    }
-  }
-}
 </style>

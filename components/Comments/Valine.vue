@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import { isActive, hashRE, groupHeaders } from '../../util'
+import { isActive, hashRE, groupHeaders } from "../../util";
 export default {
-  name: 'Valine',
+  name: "Valine",
   props: {
     hasSidebar: {
       type: Boolean,
@@ -20,38 +20,37 @@ export default {
   },
   computed: {
     data() {
-      return this.$page.frontmatter
+      return this.$page.frontmatter;
     },
   },
   mounted() {
-    this.createValine()
+    this.createValine();
   },
 
   methods: {
     createValine() {
-      const valineConfig = this.$themeConfig.valineConfig
-      if (!valineConfig) return
-      const AV = require('leancloud-storage')
-      const Valine = require('valine')
-      if (typeof window !== 'undefined') {
-        this.window = window
-        window.AV = AV
+      const valineConfig = this.$themeConfig.valineConfig;
+      if (!valineConfig) return;
+      const AV = require("leancloud-storage");
+      const Valine = require("valine");
+      if (typeof window !== "undefined") {
+        this.window = window;
+        window.AV = AV;
       } else {
-        return
+        return;
       }
       new Valine({
-        el: '#vcomments',
+        el: "#vcomments",
         appId: valineConfig.appId,
         appKey: valineConfig.appKey,
-        placeholder: valineConfig.placeholder || 'just go go',
+        placeholder: valineConfig.placeholder || "just go go",
         notify: valineConfig.notify || false,
         verify: valineConfig.verify || false,
-        avatar: valineConfig.avatar || 'monsterid',
+        avatar: valineConfig.avatar || "monsterid",
         visitor: valineConfig.visitor || true, // 阅读量统计
         recordIP: valineConfig.recordIP || false,
         path: window.location.pathname,
-      })
-      this.valineRefresh = false
+      });
     },
   },
   watch: {
@@ -59,30 +58,24 @@ export default {
       if (to.path !== from.path) {
         setTimeout(() => {
           //重新刷新valine
-          this.createValine()
-        }, 300)
+          this.createValine();
+        }, 300);
       }
     },
   },
-}
+};
 </script>
 
 <style lang="stylus" scoped>
-@media (max-width: $MQMobile) {
-  .hasSidebarAndPc {
-    margin-left: 0rem !important;
-  }
-}
-
-.hasSidebarAndPc {
-  margin-left: 20rem;
-}
-
-#vcomments {
-  max-width: 740px;
-  padding: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+@media (max-width $MQMobile)
+  .hasSidebarAndPc
+    margin-left 0rem !important
+.hasSidebarAndPc
+  margin-left 20rem
+#vcomments
+  max-width 740px
+  padding 10px
+  display block
+  margin-left auto
+  margin-right auto
 </style>

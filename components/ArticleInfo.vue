@@ -21,7 +21,7 @@
 <!-- <AccessNumber :idVal="articleInfo.path" :numStyle="numStyle"></AccessNumber> -->
 
 <script>
-import AccessCount from '@theme/components/Valine/AccessCount'
+import AccessCount from '@theme/components/Comments/AccessCount'
 import {goTags, renderTagText} from '@theme/util'
 import ZpIcon from '@theme/components/ZpIcon'
 export default {
