@@ -3,10 +3,10 @@
     <div class="util-container">
       <div class="categories">
         <router-link
+          v-for="(item, index) in getRouteData"
           class="categories-item"
           :class="{ active: getCurrentCategoryName == item.name }"
           :to="item.path"
-          v-for="(item, index) in getRouteData"
           :key="index"
           >{{ item.name }}</router-link
         >
@@ -63,7 +63,6 @@ export default {
             this.currentPage = Number(1);
           }
           this.categoryName = item;
-
           return item;
         }
       }
@@ -96,34 +95,27 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.categories {
-  margin: 3rem auto;
-  flex: 1;
-
-  .categories-item {
-    display: inline-block;
-    width: auto;
-    line-height: 1.8rem;
-    margin: 0.4rem 0.3rem;
-    padding: 0.2rem 0.5rem;
-    border: 1px solid #cfd4db;
-    border-radius: 0.3rem;
-    transition: all 0.3s;
-    color: $textColor;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-
-    &:hover {
-      background: #d0cbcb;
-      color: #fff !important;
-      border: 1px solid #d0cbcb;
-    }
-
-    &.active {
-      background: #d0cbcb !important;
-      color: #fff !important;
-      border: 1px solid #d0cbcb !important;
-    }
-  }
-}
+.categories
+  margin 3rem auto
+  flex 1
+  .categories-item
+    display inline-block
+    width auto
+    line-height 1.8rem
+    margin 0.4rem 0.3rem
+    padding 0.2rem 0.5rem
+    border 1px solid #cfd4db
+    border-radius 0.3rem
+    transition all 0.3s
+    color $textColor
+    box-shadow 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)
+    cursor pointer
+    &.hover
+      background #d0cbcb
+      color #fff !important
+      border 1px solid #d0cbcb
+    &.active
+      background #d0cbcb !important
+      color #fff !important
+      border 1px solid #d0cbcb !important
 </style>
