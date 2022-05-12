@@ -1,21 +1,16 @@
 <template>
   <div class="vcomment" v-if="data.comments !== false">
-    <div id="vcomments" v-show="commentsShow"></div>
+    <div id="valine"></div>
   </div>
 </template>
 
 <script>
-import { isActive, hashRE, groupHeaders } from "../../util";
 export default {
   name: "Valine",
   props: {
     hasSidebar: {
       type: Boolean,
       default: false,
-    },
-    commentsShow: {
-      type: Boolean,
-      default: true,
     },
   },
   computed: {
@@ -31,26 +26,20 @@ export default {
     createValine() {
       const valineConfig = this.$themeConfig.valineConfig;
       if (!valineConfig) return;
-      const AV = require("leancloud-storage");
       const Valine = require("valine");
-      if (typeof window !== "undefined") {
-        this.window = window;
-        window.AV = AV;
-      } else {
-        return;
-      }
-      new Valine({
-        el: "#vcomments",
-        appId: valineConfig.appId,
-        appKey: valineConfig.appKey,
-        placeholder: valineConfig.placeholder || "just go go",
-        notify: valineConfig.notify || false,
-        verify: valineConfig.verify || false,
-        avatar: valineConfig.avatar || "monsterid",
-        visitor: valineConfig.visitor || true, // 阅读量统计
-        recordIP: valineConfig.recordIP || false,
+      const valineOptions = {
+        el: "#valine",
+        placeholder: "just go go",
+        notify: false,
+        verify: false,
+        avatar: "retro",
+        visitor: true,
+        recordIP: false,
         path: window.location.pathname,
-      });
+        ...valineConfig,
+      };
+
+      new Valine(valineOptions);
     },
   },
   watch: {
@@ -72,7 +61,7 @@ export default {
     margin-left 0rem !important
 .hasSidebarAndPc
   margin-left 20rem
-#vcomments
+#valine
   max-width 740px
   padding 10px
   display block
