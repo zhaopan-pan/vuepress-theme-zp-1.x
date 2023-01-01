@@ -36,7 +36,7 @@
 		"@vuepress/plugin-search": "^1.0.0-alpha.48",
 		"docsearch.js": "^2.5.2",
 		"stylus": "^0.54.5",
-		"stylus-loader": "^3.0.2",
+		"stylus-loader": "^7.1.0",
 		"valine": "^1.4.15",
 		"vuepress-plugin-container": "^2.0.0"
 	},
